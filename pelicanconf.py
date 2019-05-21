@@ -2,26 +2,19 @@
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
 
-AUTHOR = u'Ihar Karotki'
-SITENAME = u'Lean-delivery'
-SITEURL = 'https://github.com/lean-delivery/lean-delivery.github.io-src'
-
-
+AUTHOR = u'Lean Delivery'
+SITENAME = u'Lean delivery'
+SITEURL = 'https://lean-delivery.com'
 THEME = "./epam-theme/"
-
 THEME_STATIC_DIR = 'static'
-
 LOAD_CONTENT_CACHE = False
-
 PATH = 'content'
 
 TIMEZONE = 'Europe/Minsk'
 
 MENUITEMS = (
-    ('Home', SITEURL),
-    ('Authors', SITEURL + '/authors.html'),
-    ('Archives', SITEURL + '/archives.html'),
-    ('Tags', SITEURL + '/tags.html')
+        ('Catgegories', SITEURL + '/catgegories.html'),
+        ('Tags', SITEURL + '/tags.html')
     )
 
 DEFAULT_LANG = 'en_US'
@@ -37,7 +30,7 @@ AUTHOR_FEED_RSS = None
 LINKS = (('Pelican', 'http://getpelican.com/'),
          ('Python.org', 'http://python.org/'),
          ('Jinja2', 'http://jinja.pocoo.org/'),
-         ('You can modify those links in your config file', '#'),)
+         ('Epam', 'https://epam.com/'),)
 
 # Social widget
 SOCIAL = (('You can add links in your config file', '#'),
@@ -52,7 +45,7 @@ PAGINATION_PATTERNS = (
 )
 
 # Uncomment following line if you want document-relative URLs when developing
-#RELATIVE_URLS = True
+RELATIVE_URLS = True
 
 #STATIC_PATHS = ['{{ THEME_STATIC_DIR }}']
 
@@ -106,10 +99,17 @@ SITEMAP = {
 ### Theme specific settings
 
 HEADER_COVER = THEME_STATIC_DIR + '/images/welcome.jpg'
-
 COLOR_SCHEME_CSS = 'github.css'
 
 #Custom Header
 
-HEADER_COVERS_BY_TAG = {'cupcake': THEME_STATIC_DIR + '/images/rainbow_cupcake_cover.jpg', 'general': THEME_STATIC_DIR + '/images/welcome.jpg'}
+HEADER_COVERS_BY_TAG = {
+    'cupcake': THEME_STATIC_DIR + '/images/rainbow_cupcake_cover.jpg',
+    'general': THEME_STATIC_DIR + '/images/welcome.jpg'
+}
 
+EXTRA_PATH_METADATA = {
+    'extra/CNAME': {'path': 'CNAME'},
+    'extra/robots.txt': {'path': 'robots.txt'},
+    'extra/favicon.ico': {'path': 'favicon.ico'},
+}
