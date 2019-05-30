@@ -1,0 +1,3 @@
+[submodule "docs"]
+	path = docs
+	url = git@github.com:lean-delivery/lean-delivery.github.io.git
