@@ -36,7 +36,7 @@ LINKS = (('Pelican', 'http://getpelican.com/'),
 SOCIAL = (('You can add links in your config file', '#'),
           ('Another social link', '#'),)
 
-DISQUS_SITENAME = "lean-delivery"
+DISQUS_SITENAME = "lean-delivery-com"
 
 DEFAULT_PAGINATION = 3
 PAGINATION_PATTERNS = (
