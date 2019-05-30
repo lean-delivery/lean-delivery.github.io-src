@@ -10,6 +10,8 @@ THEME_STATIC_DIR = 'static'
 LOAD_CONTENT_CACHE = False
 PATH = 'content'
 
+GOOGLE_ANALYTICS = "UA-141126312-1"
+
 TIMEZONE = 'Europe/Minsk'
 
 MENUITEMS = (

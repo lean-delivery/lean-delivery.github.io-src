@@ -22,4 +22,4 @@ DELETE_OUTPUT_DIRECTORY = True
 # Following items are often useful when publishing
 
 DISQUS_SITENAME = "lean-delivery"
-#GOOGLE_ANALYTICS = ""
+GOOGLE_ANALYTICS = "UA-141126312-1"
