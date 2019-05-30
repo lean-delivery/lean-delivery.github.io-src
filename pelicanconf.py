@@ -5,6 +5,7 @@ from __future__ import unicode_literals
 AUTHOR = u'Lean Delivery'
 SITENAME = u'Lean delivery'
 SITEURL = 'https://lean-delivery.com'
+FEED_DOMAIN = SITEURL
 THEME = "./epam-theme/"
 THEME_STATIC_DIR = 'static'
 LOAD_CONTENT_CACHE = False
@@ -35,8 +36,8 @@ LINKS = (('Pelican', 'http://getpelican.com/'),
          ('Epam', 'https://epam.com/'),)
 
 # Social widget
-SOCIAL = (('You can add links in your config file', '#'),
-          ('Another social link', '#'),)
+SOCIAL = (('YouTube', 'https://www.youtube.com/channel/UCY72iLesh8Q9qSthzxSeJwQ'),
+          ('GitHub', 'https://github.com/lean-delivery'),)
 
 DISQUS_SITENAME = "lean-delivery-com"
 
