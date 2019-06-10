@@ -32,6 +32,8 @@
                         {{ article.summary|striptags|truncate(250) }}
                     {% endif %}
                     </p>
+                    <br>
+                    <a id="show-more" href="{{ SITEURL }}/{{ article.url }}" >Read more</a>
                 </section>
             {% endif %}
             {% include 'partials/comments_count.html' %}
