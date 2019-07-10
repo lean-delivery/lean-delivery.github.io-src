@@ -49,4 +49,3 @@ resource "local_file" "set_backend_config" {
   content  = "bucket = \"${aws_s3_bucket.terraform-state.id}\"\ndynamodb_table = \"${aws_dynamodb_table.terraform-state-lock.id}\"\nregion = \"${var.aws_region}\""
   filename = "../${var.environment}.hcl"
 }
-

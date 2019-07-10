@@ -6,18 +6,12 @@ terraform {
   }
 }
 
-data "aws_partition" "current" {}
-
 provider "aws" {
   region = "${var.region}"
 }
 
-locals {
-  environment = "${ terraform.workspace == "default" ? "common" : replace("${terraform.workspace}","-${var.region}","")}"
-}
-
 module "tf-module-aws-s3-cf-acm" {
-  source = "github.com/lean-delivery/tf-module-aws-s3-cf-acm"
+  source = "github.com/lean-delivery/tf-module-aws-s3-cf-acm?ref=develop"
 
   namespace                    = "${var.namespace}"
   stage                        = "${var.stage}"

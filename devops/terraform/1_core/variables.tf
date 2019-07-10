@@ -39,5 +39,5 @@ variable "acm_tags" {
 variable "region" {
   description = "Namespace (forming bucket name)"
   type        = "string"
-  default     = "us-east-1"
+  default     = "eu-central-1"
 }
