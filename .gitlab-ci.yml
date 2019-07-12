@@ -1,0 +1,30 @@
+---
+# Run all tests
+stages:
+  - validate
+  - deploy
+
+#before_script:
+#  -
+
+#variables:
+  #GET_SOURCES_ATTEMPTS: "5"
+
+Validate:
+  stage: validate
+#  before_script:
+#    -
+#  script:
+#    -
+#    -
+#  after_script:
+#    -
+  tags:
+    - ldi-blog
+
+Deploy:
+  stage: deploy
+#  script:
+#    -
+#  tags:
+#    - ldi-blog
