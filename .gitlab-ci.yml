@@ -20,6 +20,6 @@ job1:
     - pelican
 
   after_script:
-    - aws s3 cp output/* s3://blog-dev-blog-origin/$CI_COMMIT_REF_NAME/ --recursive
+    - aws s3 cp output s3://blog-dev-blog-origin/$CI_COMMIT_REF_NAME/ --recursive
   tags:
     - aws
