@@ -18,6 +18,8 @@ job1:
     - for filename in content/articles/*.rst; do python -m rstvalidator "$filename"; done
     - for filename in content/pages/*.rst; do python -m rstvalidator "$filename"; done
     - pelican
+    - ls output
+    - ls ..
   after_script:
     - aws s3 cp ../output/* s3://blog-dev-blog-origin/$CI_COMMIT_REF_NAME/ --recursive
   tags:
