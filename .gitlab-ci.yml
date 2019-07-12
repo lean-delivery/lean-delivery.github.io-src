@@ -1,30 +1,29 @@
 ---
-# Run all tests
 stages:
   - validate
   - deploy
 
-#before_script:
-#  -
+before_script:
+  - pip install pelican
 
 #variables:
-  #GET_SOURCES_ATTEMPTS: "5"
+#  GET_SOURCES_ATTEMPTS: "5"
 
 job1:
   stage: validate
-#  before_script:
-#    -
-#  script:
-#    -
-#    -
-#  after_script:
-#    -
+  before_script:
+    - ls
+  script:
+    - ls
+    - ls
+  after_script:
+    - ls
   tags:
     - ldi-blog
 
 job2:
   stage: deploy
-#  script:
-#    -
-#  tags:
-#    - ldi-blog
+  script:
+    - ls
+  tags:
+    - ldi-blog
