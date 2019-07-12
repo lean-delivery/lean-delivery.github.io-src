@@ -10,7 +10,7 @@ stages:
 #variables:
   #GET_SOURCES_ATTEMPTS: "5"
 
-Validate:
+job1:
   stage: validate
 #  before_script:
 #    -
@@ -22,7 +22,7 @@ Validate:
   tags:
     - ldi-blog
 
-Deploy:
+job2:
   stage: deploy
 #  script:
 #    -
