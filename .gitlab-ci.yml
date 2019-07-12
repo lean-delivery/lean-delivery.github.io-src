@@ -13,8 +13,8 @@ job1:
     - pip install pelican
     - sed -i 's/lean-delivery.com/preview.lean-delivery.com/g' pelicanconf.py
   script:
-    - for filename in content/articles/*.rst; do python -m rstvalidator "$filename" done
-    - for filename in content/pages/*.rst; do python -m rstvalidator "$filename" done
+    - for filename in content/articles/*.rst; do python -m rstvalidator "$filename"; done
+    - for filename in content/pages/*.rst; do python -m rstvalidator "$filename"; done
   after_script:
     - pelican -s publishconf.py
   tags:
