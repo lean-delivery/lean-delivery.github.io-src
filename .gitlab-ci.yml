@@ -13,11 +13,12 @@ job1:
     - pip install pelican
     - pip install --upgrade awscli
     - sed -i 's/lean-delivery.com/preview.lean-delivery.com/g' pelicanconf.py
+    - aws s3 rm s3://blog-dev-blog-origin/$CI_COMMIT_REF_NAME/ --recursive
   script:
     - for filename in content/articles/*.rst; do python -m rstvalidator "$filename"; done
     - for filename in content/pages/*.rst; do python -m rstvalidator "$filename"; done
     - pelican -s publishconf.py
   after_script:
-    - aws s3 cp output/* s3://blog-dev-blog-origin/$CI_COMMIT_REF_NAME/ --recursive
+    - aws s3 cp ../output/* s3://blog-dev-blog-origin/$CI_COMMIT_REF_NAME/ --recursive
   tags:
     - aws
