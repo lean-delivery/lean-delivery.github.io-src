@@ -3,27 +3,26 @@ stages:
   - validate
   - deploy
 
-before_script:
-  - pip install pelican
-
 #variables:
 #  GET_SOURCES_ATTEMPTS: "5"
 
 job1:
   stage: validate
   before_script:
-    - ls
+    - pip install rstvalidator
+    - pip install pelican
+    - sed -i 's/lean-delivery.com/preview.lean-delivery.com/g' pelicanconf.py
   script:
-    - ls
-    - ls
+    - python -m rstvalidator content/articles/
+    - python -m rstvalidator content/pages/
   after_script:
-    - ls
+    - pelican -s publishconf.py
   tags:
-    - ldi-blog
+    - aws
 
 job2:
   stage: deploy
   script:
-    - ls
+    - aws s3 cp output/* s3://blog-dev-blog-origin/$CI_COMMIT_REF_NAME/ --recursive
   tags:
-    - ldi-blog
+    - aws
