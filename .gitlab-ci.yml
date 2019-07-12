@@ -12,7 +12,7 @@ job1:
     - pip install rstvalidator
     - pip install pelican
     - pip install --upgrade awscli
-    - sed -i 's,lean-delivery.com,preview.lean-delivery.com/$CI_COMMIT_REF_NAME,g' pelicanconf.py
+    - sed -i "s,lean-delivery.com,preview.lean-delivery.com/$CI_COMMIT_REF_NAME,g" pelicanconf.py
     - aws s3 rm s3://blog-dev-blog-origin/$CI_COMMIT_REF_NAME/ --recursive
   script:
     - for filename in content/articles/*.rst; do python -m rstvalidator "$filename"; done
