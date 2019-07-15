@@ -6,17 +6,26 @@ stages:
 #variables:
 #  GET_SOURCES_ATTEMPTS: "5"
 
-job1:
+RST Validate:
   stage: validate
   before_script:
     - pip install rstvalidator
+    -
+  script:
+    - for filename in content/articles/*.rst; do python -m rstvalidator "$filename"; done
+    - for filename in content/pages/*.rst; do python -m rstvalidator "$filename"; done
+
+  tags:
+    - aws
+
+Build - Deploy:
+  stage: deploy
+  before_script:
     - pip install pelican
     - pip install --upgrade awscli
     - sed -i "s,lean-delivery.com,preview.lean-delivery.com/$CI_COMMIT_REF_NAME,g" pelicanconf.py
     - aws s3 rm s3://blog-dev-blog-origin/$CI_COMMIT_REF_NAME/ --recursive
   script:
-    - for filename in content/articles/*.rst; do python -m rstvalidator "$filename"; done
-    - for filename in content/pages/*.rst; do python -m rstvalidator "$filename"; done
     - pelican
 
   after_script:
