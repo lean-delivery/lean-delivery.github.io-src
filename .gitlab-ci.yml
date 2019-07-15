@@ -10,7 +10,7 @@ RST Validate:
   stage: validate
   before_script:
     - pip install rstvalidator
-    -
+
   script:
     - for filename in content/articles/*.rst; do python -m rstvalidator "$filename"; done
     - for filename in content/pages/*.rst; do python -m rstvalidator "$filename"; done
