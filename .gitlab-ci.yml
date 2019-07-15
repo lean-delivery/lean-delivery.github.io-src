@@ -30,6 +30,6 @@ Build - Deploy:
 
   after_script:
     - aws s3 cp output s3://blog-dev-blog-origin/$CI_COMMIT_REF_NAME/ --recursive
-    - aws cloudfront update-distribution --id E3H2ZXM5EJNA8H --default-root-object index.html
+    - aws cloudfront update-distribution --id E3H2ZXM5EJNA8H --default-root-object $CI_COMMIT_REF_NAME/index.html
   tags:
     - aws
