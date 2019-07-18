@@ -15,10 +15,6 @@ RST Validate:
     - for filename in content/articles/*.rst; do python -m rstvalidator "$filename"; done
     - for filename in content/pages/*.rst; do python -m rstvalidator "$filename"; done
 
-  only:
-    - merge_requests
-    - master
-
   tags:
     - aws
 
@@ -36,8 +32,22 @@ Build - Deploy:
     - aws s3 cp output s3://blog-dev-blog-origin/$CI_COMMIT_REF_NAME/ --recursive
     - aws cloudfront update-distribution --id E3H2ZXM5EJNA8H --default-root-object $CI_COMMIT_REF_NAME/index.html
 
+  except:
+    - master
+
+  tags:
+    - aws
+
+Realese:
+  stage: deploy
+  before_script:
+    - pip install pelican
+    - pip install --upgrade awscli
+  script:
+    - pelican
+    - cp output/* docs/*
+
   only:
-    - merge_requests
     - master
 
   tags:
