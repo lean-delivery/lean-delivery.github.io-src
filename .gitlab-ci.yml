@@ -22,7 +22,7 @@ RST Validate:
 Build - Deploy:
   stage: deploy
   before_script:
-    - yum install curl
+    - apk add --no-cache curl
     - pip install pelican
     - pip install --upgrade awscli
     - sed -i "s,lean-delivery.com,preview.lean-delivery.com/$CI_COMMIT_REF_NAME,g" pelicanconf.py
