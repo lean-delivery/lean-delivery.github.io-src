@@ -4,8 +4,6 @@ stages:
   - deploy
   - release
 
-#variables:
-#  GET_SOURCES_ATTEMPTS: "5"
 
 RST Validate:
   stage: validate
