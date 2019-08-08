@@ -29,6 +29,7 @@ Build - Deploy:
     - sed -i "s,/{slug}\',/{slug}/index.html\',g" pelicanconf.py
     - aws s3 rm s3://blog-dev-blog-origin/$CI_COMMIT_REF_NAME/ --recursive
     - curl -H "Authorization:token $GITHUB_TOKEN" -d $body -X POST https://api.github.com/repos/lean-delivery/lean-delivery.github.io-src/commits/$CI_COMMIT_SHA/comments
+    - cat pelicanconf.py
   script:
     - pelican
 
