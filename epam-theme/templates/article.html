@@ -173,8 +173,8 @@
                 {% endfor %}
 
                 </section>
-
                 {% if DISQUS_SITENAME and SITEURL and article.status != "draft" %}
+                <div id="disqus_thread"></div>
                 <script type="text/javascript">
                     var disqus = '{{ DISQUS_SITENAME }}';
                     var disqus_shortname = '{{ DISQUS_SITENAME }}';
@@ -192,7 +192,6 @@
                     {% else %}
                         <a id="show-disqus" class="post-comments-activate" data-disqus-identifier="/{{ article.url }}" >Show Comments</a>
                     {% endif %}
-                    <div id="disqus_thread"></div>
                 </section>
                 {% endif %}
 
