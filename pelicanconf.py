@@ -55,7 +55,7 @@ RELATIVE_URLS = False
 # Post and Pages path
 ARTICLE_URL = '{date:%Y}/{date:%m}/{slug}.html'
 ARTICLE_SAVE_AS = '{date:%Y}/{date:%m}/{slug}.html'
-PAGE_URL = 'pages/{slug}/'
+PAGE_URL = 'pages/{slug}/index.html'
 PAGE_SAVE_AS = 'pages/{slug}/index.html'
 YEAR_ARCHIVE_SAVE_AS = '{date:%Y}/index.html'
 MONTH_ARCHIVE_SAVE_AS = '{date:%Y}/{date:%m}/index.html'
@@ -67,9 +67,6 @@ CATEGORIES_SAVE_AS = 'catgegories.html'
 TAG_URL = 'tag/{slug}'
 TAG_SAVE_AS = 'tag/{slug}/index.html'
 TAGS_SAVE_AS = 'tags.html'
-ABOUT_URL = 'pages/{slug}/index.html'
-ABOUT_SAVE_AS = 'pages/{slug}/index.html'
-ABOUT_SAVE_AS = 'index.html'
 
 
 # Author
