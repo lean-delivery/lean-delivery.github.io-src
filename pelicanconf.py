@@ -67,11 +67,16 @@ CATEGORIES_SAVE_AS = 'catgegories.html'
 TAG_URL = 'tag/{slug}'
 TAG_SAVE_AS = 'tag/{slug}/index.html'
 TAGS_SAVE_AS = 'tags.html'
+ABOUT_URL = 'pages/{slug}/index.html'
+ABOUT_SAVE_AS = 'pages/{slug}/index.html'
+ABOUT_SAVE_AS = 'index.html'
+
 
 # Author
 AUTHOR_URL = 'author/{slug}'
 AUTHOR_SAVE_AS = 'author/{slug}/index.html'
 AUTHORS_SAVE_AS = 'authors.html'
+
 
 ### Plugins
 
