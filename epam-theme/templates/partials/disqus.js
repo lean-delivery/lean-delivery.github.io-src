@@ -1,12 +1,11 @@
 {% if DISQUS_SITENAME %}
 <script type="text/javascript">
-    var disqus_shortname = '{{ DISQUS_SITENAME }}';
     var disqus_config = function () {
         // Replace PAGE_URL with your page's canonical URL variable
-        this.page.url = PAGE_URL;
+        this.page.url = disqus_url;
 
         // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        this.page.identifier = PAGE_IDENTIFIER;
+        this.page.identifier = disqus_identifier;
     };
     (function() {  // REQUIRED CONFIGURATION VARIABLE: EDIT THE SHORTNAME BELOW
         var d = document, s = d.createElement('script');

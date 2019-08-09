@@ -173,7 +173,6 @@
                 {% endfor %}
 
                 </section>
-                {% if DISQUS_SITENAME and SITEURL and article.status != "draft" %}
                 <div id="disqus_thread"></div>
                 <script type="text/javascript">
                     var disqus = '{{ DISQUS_SITENAME }}';
@@ -185,15 +184,6 @@
                     {% endif %}
                     var disqus_url = '{{ SITEURL }}/{{ article.url }}';
                 </script>
-                <noscript>Please enable JavaScript to view the comments.</noscript>
-                <section class="post-comments">
-                    {% if article.disqus_identifier %}
-                        <a id="show-disqus" class="post-comments-activate" data-disqus-identifier="{{ article.disqus_identifier }}" >Show Comments</a>
-                    {% else %}
-                        <a id="show-disqus" class="post-comments-activate" data-disqus-identifier="/{{ article.url }}" >Show Comments</a>
-                    {% endif %}
-                </section>
-                {% endif %}
 
                 <div class="post-nav">
                     {% if article.next_article %}
