@@ -35,7 +35,7 @@ When you'll decide to share your perfect solution with community by posting it i
 
    git push
 
-6. It will be ran a CD pipeline with rst syntax checker, and if it will be passed successfully, will be placed a comment with a link where you can preview your changes to the current commit.
+6. It will be ran a CD pipeline with rst syntax checker, and if it will be passed successfully, will be placed a comment with links of preview site and CD pipeline status to the current commit.
 
 You could see a build status here https://gitlab.com/lean-delivery/lean-delivery-github-io-src/-/jobs/
 
