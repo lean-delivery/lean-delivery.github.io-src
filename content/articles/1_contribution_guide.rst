@@ -3,7 +3,7 @@ Contribution guide post
 :date: 2019-08-14 13:50
 :author: Aliaksei Zeliashchonak
 :tags: non-technical
-:slug: init
+:slug: contribution_guide
 
 So, if you decided to create an article in LDI blog please follow this guide:
 
