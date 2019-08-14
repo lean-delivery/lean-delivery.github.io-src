@@ -47,15 +47,15 @@ Deployment preview steps in any "dev" branches are:
 
 1. Run RST Validation of ".rst" files.
 2. Remove files (if exists) in s3 subfolder named as a current branch.
-3. Build a static site with "pelican" (https://blog.getpelican.com/)
+3. Build a static site with "pelican" https://blog.getpelican.com/
 4. Change the default app URL in pelicanconf.py.
 5. Create (if not exists) subfolder in s3 bucket with the name of the current branch.
 6. Copy output files after the build to this subfolder.
-7. Create a comment with a link to preview page (https://preview.lean-delivery.com/<branch_name>) in the current commit.
+7. Create a comment with a link to preview page https://preview.lean-delivery.com/<branch_name> in the current commit.
 
 Deployment from the master branch:
 
-1. Build a static site with "pelican" (https://blog.getpelican.com/)
+1. Build a static site with "pelican" https://blog.getpelican.com/
 2. Copy output files after the build to "docs" folder (it's a GitHub submodule for GitHub Pages)
 3. Update submodule with rebase.
 
