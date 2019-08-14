@@ -1,11 +1,13 @@
-Contribution guide post
+Contribution guide
 #######################
 :date: 2019-08-14 13:50
 :author: Aliaksei Zeliashchonak
 :tags: non-technical
 :slug: contribution_guide
 
-So, if you decided to create an article in LDI blog please follow this guide:
+Hi all!
+
+When you'll decided to share your perfect solution with community by posting it in LDI blog please follow this guide:
 
 1. Clone source code "git clone https://github.com/lean-delivery/lean-delivery.github.io-src.git"
 2. Create a new branch "git branch <branch_name>".
