@@ -7,7 +7,7 @@ Contribution guide
 
 Hi all!
 
-When you'll decided to share your perfect solution with community by posting it in LDI blog please follow this guide:
+When you'll decide to share your perfect solution with community by posting it in LDI blog please follow this guide:
 
 1. Clone source code
 
