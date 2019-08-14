@@ -9,11 +9,15 @@ Hi all!
 
 When you'll decided to share your perfect solution with community by posting it in LDI blog please follow this guide:
 
-1. Clone source code .. code-block:: shell git clone https://github.com/lean-delivery/lean-delivery.github.io-src.git
-2. Create a new branch .. code-block:: shell git branch <branch_name>
+1. Clone source code
+.. code-block:: python git clone https://github.com/lean-delivery/lean-delivery.github.io-src.git
+2. Create a new branch
+.. code-block:: python git branch <branch_name>
 3. Create a new page in content/articles folder with the next count number of existing pages in the name with “rst” type, for example “1_contribution_guide.rst”
-4. Commit changes .. code-block:: shell git commit
-5. Push it to github .. code-block:: shell git push
+4. Commit changes
+.. code-block:: python git commit
+5. Push it to github
+.. code-block:: python git push
 6. It will be ran a CD pipeline with rst syntax checker, and if it will be passed successfully, will be placed a comment with a link where you can preview your changes to the current commit.(You could see a build status here https://gitlab.com/lean-delivery/lean-delivery-github-io-src/-/jobs/)
 
 If you want to publish your changes in lean-delivery.com just create a merge request from your branch to master.
