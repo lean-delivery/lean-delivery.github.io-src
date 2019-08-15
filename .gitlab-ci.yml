@@ -20,7 +20,7 @@ RST Validate:
 Build - Deploy:
   stage: deploy
   variables:
-    body: '{"body":"preview_app http://preview.lean-delivery.com/$CI_COMMIT_REF_NAME/index.html\nCD pipeline https://gitlab.com/lean-delivery/lean-delivery-github-io-src/pipelines/$CI_PIPELINE_ID"}'
+    body: '{"body":"preview_app:http://preview.lean-delivery.com/$CI_COMMIT_REF_NAME/index.html\nCD-pipeline:https://gitlab.com/lean-delivery/lean-delivery-github-io-src/pipelines/$CI_PIPELINE_ID"}'
   before_script:
     - apk add --no-cache curl
     - pip install pelican
