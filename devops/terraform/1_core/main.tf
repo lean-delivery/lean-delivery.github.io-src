@@ -8,6 +8,7 @@ terraform {
 
 provider "aws" {
   region = "${var.region}"
+  profile =  "ldi"
 }
 
 module "tf-module-aws-s3-cf-acm" {
