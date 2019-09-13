@@ -4,7 +4,7 @@ stage = "dev"
 
 name = "blog"
 
-aliases = ["review.lean-delivery.com"]
+aliases = ["*.preview.lean-delivery.com"]
 
 hosted_zone_name = "lean-delivery.com"
 

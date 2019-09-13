@@ -10,6 +10,7 @@ THEME = "./epam-theme/"
 THEME_STATIC_DIR = 'static'
 LOAD_CONTENT_CACHE = False
 PATH = 'content'
+STATIC_PATHS = ['images']
 
 GOOGLE_ANALYTICS = "UA-141126312-1"
 
