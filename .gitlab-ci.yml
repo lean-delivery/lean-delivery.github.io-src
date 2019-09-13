@@ -1,0 +1,57 @@
+---
+stages:
+  - validate
+  - deploy
+  - release
+
+
+RST Validate:
+  stage: validate
+  before_script:
+    - pip install rstvalidator
+
+  script:
+    - for filename in content/articles/*.rst; do python -m rstvalidator "$filename"; done
+    - for filename in content/pages/*.rst; do python -m rstvalidator "$filename"; done
+
+  tags:
+    - aws
+
+Build - Deploy:
+  stage: deploy
+  variables:
+    body: '{"body":"preview_app: http://preview.lean-delivery.com/$CI_COMMIT_REF_NAME/index.html\nCD-pipeline: https://gitlab.com/lean-delivery/lean-delivery-github-io-src/pipelines/$CI_PIPELINE_ID"}'
+  before_script:
+    - apk add --no-cache curl
+    - pip install pelican
+    - pip install --upgrade awscli
+    - sed -i "s,https://lean-delivery.com,https://preview.lean-delivery.com/$CI_COMMIT_REF_NAME/$CI_COMMIT_SHA,g" pelicanconf.py
+    - sed -i "s,/{slug}\',/{slug}\.html\',g" pelicanconf.py
+    - aws s3 rm s3://blog-dev-blog-origin/$CI_COMMIT_REF_NAME/$CI_COMMIT_SHA --recursive
+    - curl -H "Authorization:token $GITHUB_TOKEN" -d "$body" -X POST https://api.github.com/repos/lean-delivery/lean-delivery.github.io-src/commits/$CI_COMMIT_SHA/comments
+  script:
+    - pelican
+
+  after_script:
+    - aws s3 cp output s3://blog-dev-blog-origin/$CI_COMMIT_REF_NAME/$CI_COMMIT_SHA --recursive
+
+  except:
+    - master
+
+  tags:
+    - aws
+
+Realese:
+  stage: release
+  before_script:
+    - pip install pelican
+    - pip install --upgrade awscli
+  script:
+    - pelican
+    - cp output/* docs/*
+    - cd docs/ && git submodule update --remote --rebase
+  only:
+    - master
+
+  tags:
+    - aws

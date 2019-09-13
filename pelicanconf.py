@@ -10,6 +10,7 @@ THEME = "./epam-theme/"
 THEME_STATIC_DIR = 'static'
 LOAD_CONTENT_CACHE = False
 PATH = 'content'
+STATIC_PATHS = ['images']
 
 GOOGLE_ANALYTICS = "UA-141126312-1"
 
@@ -55,7 +56,7 @@ RELATIVE_URLS = False
 # Post and Pages path
 ARTICLE_URL = '{date:%Y}/{date:%m}/{slug}.html'
 ARTICLE_SAVE_AS = '{date:%Y}/{date:%m}/{slug}.html'
-PAGE_URL = 'pages/{slug}/'
+PAGE_URL = 'pages/{slug}/index.html'
 PAGE_SAVE_AS = 'pages/{slug}/index.html'
 YEAR_ARCHIVE_SAVE_AS = '{date:%Y}/index.html'
 MONTH_ARCHIVE_SAVE_AS = '{date:%Y}/{date:%m}/index.html'
@@ -68,10 +69,12 @@ TAG_URL = 'tag/{slug}'
 TAG_SAVE_AS = 'tag/{slug}/index.html'
 TAGS_SAVE_AS = 'tags.html'
 
+
 # Author
 AUTHOR_URL = 'author/{slug}'
 AUTHOR_SAVE_AS = 'author/{slug}/index.html'
 AUTHORS_SAVE_AS = 'authors.html'
+
 
 ### Plugins
 
