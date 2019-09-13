@@ -1,0 +1,13 @@
+---
+dist: trusty
+
+git:
+  submodules:
+    false
+
+addons:
+  sonarcloud:
+    organization: "lean-delivery"
+
+script:
+  - sonar-scanner
