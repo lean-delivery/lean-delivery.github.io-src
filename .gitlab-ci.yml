@@ -29,6 +29,13 @@ Build - Deploy:
     - sed -i "s,/{slug}\',/{slug}\.html\',g" pelicanconf.py
     - aws s3 rm s3://blog-dev-blog-origin/$CI_COMMIT_REF_NAME/$CI_COMMIT_SHA --recursive
     - curl -H "Authorization:token $GITHUB_TOKEN" -d "$body" -X POST https://api.github.com/repos/lean-delivery/lean-delivery.github.io-src/commits/$CI_COMMIT_SHA/comments
+    - git config --global user.name "${GITLAB_USER_NAME}"
+    - git config --global user.email "${GITLAB_USER_EMAIL}"
+    - cp -R output/* docs/
+    - cd docs/
+    - git add --all
+    - git commit -m "GitLab Runner Push"
+    - git push http://${YOUR_USERNAME}:${GITHUB_TOKEN}@github.com/lean-delivery/lean-delivery.github.io.git HEAD:master
   script:
     - pelican
 
@@ -46,10 +53,14 @@ Realese:
   before_script:
     - pip install pelican
     - pip install --upgrade awscli
+    - git config --global user.name "${GITLAB_USER_NAME}"
+    - git config --global user.email "${GITLAB_USER_EMAIL}"
   script:
     - pelican
     - cp -R output/* docs/
-    - cd docs/ && git commit && git push
+    - git add --all
+    - git commit -m "GitLab Runner Push"
+    - git push http://${YOUR_USERNAME}:${GITHUB_TOKEN}@github.com/lean-delivery/lean-delivery.github.io.git HEAD:master
   only:
     - master
 
