@@ -49,7 +49,7 @@ Realese:
   script:
     - pelican
     - cp output/* docs/*
-    - cd docs/ && git submodule update --remote --rebase
+    - cd docs/ && git push
   only:
     - master
 
