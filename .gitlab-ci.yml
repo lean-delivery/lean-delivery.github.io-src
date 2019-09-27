@@ -48,8 +48,8 @@ Realese:
     - pip install --upgrade awscli
   script:
     - pelican
-    - cp output/* docs/*
-    - cd docs/ && git submodule update --remote --rebase
+    - cp -R output/* docs/
+    - cd docs/ && git push
   only:
     - master
 
