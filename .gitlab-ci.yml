@@ -48,7 +48,7 @@ Realese:
     - pip install --upgrade awscli
   script:
     - pelican
-    - cp output/* docs/*
+    - cp -R output/* docs/
     - cd docs/ && git push
   only:
     - master
