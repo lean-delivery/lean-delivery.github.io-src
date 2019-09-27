@@ -49,7 +49,7 @@ Realese:
   script:
     - pelican
     - cp -R output/* docs/
-    - cd docs/ && git push
+    - cd docs/ && git commit && git push
   only:
     - master
 
