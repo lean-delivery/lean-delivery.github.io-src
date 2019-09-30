@@ -34,10 +34,9 @@ Build - Deploy:
   script:
     - pelican
     - cp -a output/. docs/
-    - cd docs/
-    - git add --all
-    - git commit -m "GitLab Runner Push"
-    - git push http://${YOUR_USERNAME}:${GITHUB_TOKEN}@github.com/lean-delivery/lean-delivery.github.io.git HEAD:master
+    - git add --all --recurse-submodules
+    - git commit -m "GitLab Runner Push" --recurse-submodules
+    - git push http://${YOUR_USERNAME}:${GITHUB_TOKEN}@github.com/lean-delivery/lean-delivery.github.io.git HEAD:master --recurse-submodules
 
   after_script:
     - aws s3 cp output s3://blog-dev-blog-origin/$CI_COMMIT_REF_NAME/$CI_COMMIT_SHA --recursive
