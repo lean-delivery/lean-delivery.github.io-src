@@ -31,6 +31,7 @@ Build - Deploy:
     - curl -H "Authorization:token $GITHUB_TOKEN" -d "$body" -X POST https://api.github.com/repos/lean-delivery/lean-delivery.github.io-src/commits/$CI_COMMIT_SHA/comments
     - git config --global user.name "${GITLAB_USER_NAME}"
     - git config --global user.email "${GITLAB_USER_EMAIL}"
+    - ls -la
     - cp -a output/. docs/
     - cd docs/
     - git add --all
