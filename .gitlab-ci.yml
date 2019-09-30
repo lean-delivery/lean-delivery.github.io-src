@@ -31,14 +31,13 @@ Build - Deploy:
     - curl -H "Authorization:token $GITHUB_TOKEN" -d "$body" -X POST https://api.github.com/repos/lean-delivery/lean-delivery.github.io-src/commits/$CI_COMMIT_SHA/comments
     - git config --global user.name "${GITLAB_USER_NAME}"
     - git config --global user.email "${GITLAB_USER_EMAIL}"
-    - ls -la
+  script:
+    - pelican
     - cp -a output/. docs/
     - cd docs/
     - git add --all
     - git commit -m "GitLab Runner Push"
     - git push http://${YOUR_USERNAME}:${GITHUB_TOKEN}@github.com/lean-delivery/lean-delivery.github.io.git HEAD:master
-  script:
-    - pelican
 
   after_script:
     - aws s3 cp output s3://blog-dev-blog-origin/$CI_COMMIT_REF_NAME/$CI_COMMIT_SHA --recursive
