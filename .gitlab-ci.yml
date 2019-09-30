@@ -34,9 +34,10 @@ Build - Deploy:
   script:
     - pelican
     - cp -a output/. docs/
+    - git submodule init
+    - git submodule update
     - cd docs/
     - git status
-    - git checkout master
     - git add --all
     - git commit -m "GitLab Runner Push"
     - git push http://${YOUR_USERNAME}:${GITHUB_TOKEN}@github.com/lean-delivery/lean-delivery.github.io.git HEAD:master
