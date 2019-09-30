@@ -33,9 +33,9 @@ Build - Deploy:
     - git config --global user.email "${GITLAB_USER_EMAIL}"
   script:
     - pelican
-    - cp -a output/. docs/
     - git submodule init
     - git submodule update
+    - cp -a output/. docs/
     - cd docs/
     - git status
     - git add --all
