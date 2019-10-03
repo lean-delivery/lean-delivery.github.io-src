@@ -20,7 +20,7 @@ RST Validate:
 Build - Deploy:
   stage: deploy
   variables:
-    body: '{"body":"preview_app: http://preview.lean-delivery.com/$CI_COMMIT_REF_NAME/index.html\nCD-pipeline: https://gitlab.com/lean-delivery/lean-delivery-github-io-src/pipelines/$CI_PIPELINE_ID"}'
+    body: '{"body":"preview_app: http://preview.lean-delivery.com/$CI_COMMIT_REF_NAME/$CI_COMMIT_SHA/index.html\nCD-pipeline: https://gitlab.com/lean-delivery/lean-delivery-github-io-src/pipelines/$CI_PIPELINE_ID"}'
   before_script:
     - apk add --no-cache curl
     - pip install pelican
@@ -46,10 +46,19 @@ Realese:
   before_script:
     - pip install pelican
     - pip install --upgrade awscli
+    - git config --global user.name "${GITLAB_USER_NAME}"
+    - git config --global user.email "${GITLAB_USER_EMAIL}"
   script:
     - pelican
-    - cp -R output/* docs/
-    - cd docs/ && git commit && git push
+    - git submodule deinit --all -f
+    - git submodule init
+    - git submodule update
+    - cd docs/
+    - git pull origin master
+    - cp -a ../output/. .
+    - git add --all
+    - git commit -m "GitLab Runner Push"
+    - git push http://lean-delivery-bot:${LEAN_BOT_TOKEN}@github.com/lean-delivery/lean-delivery.github.io.git HEAD:master
   only:
     - master
 

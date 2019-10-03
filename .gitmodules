@@ -1,4 +1,4 @@
 [submodule "docs"]
 	path = docs
-	url = git@github.com:lean-delivery/lean-delivery.github.io.git
+	url = https://github.com/lean-delivery/lean-delivery.github.io.git
 	branch = master
