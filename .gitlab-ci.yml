@@ -36,8 +36,9 @@ Build - Deploy:
     - git submodule deinit --all -f
     - git submodule init
     - git submodule update
-    - cp -a output/. docs/
     - cd docs/
+    - git pull
+    - cp -a ../output/. .
     - git add --all
     - git commit -m "GitLab Runner Push"
     - git push http://lean-delivery-bot:${LEAN_BOT_TOKEN}@github.com/lean-delivery/lean-delivery.github.io.git HEAD:master
