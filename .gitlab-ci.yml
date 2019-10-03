@@ -40,7 +40,7 @@ Build - Deploy:
     - cd docs/
     - git add --all
     - git commit -m "GitLab Runner Push"
-    - git push http://${YOUR_USERNAME}:${GITHUB_TOKEN}@github.com/lean-delivery/lean-delivery.github.io.git HEAD:master
+    - git push http://lean-delivery-bot:${LEAN_BOT_TOKEN}@github.com/lean-delivery/lean-delivery.github.io.git HEAD:master
 
   after_script:
     - aws s3 cp output s3://blog-dev-blog-origin/$CI_COMMIT_REF_NAME/$CI_COMMIT_SHA --recursive
