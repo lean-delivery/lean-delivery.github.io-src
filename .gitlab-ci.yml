@@ -29,19 +29,8 @@ Build - Deploy:
     - sed -i "s,/{slug}\',/{slug}\.html\',g" pelicanconf.py
     - aws s3 rm s3://blog-dev-blog-origin/$CI_COMMIT_REF_NAME/$CI_COMMIT_SHA --recursive
     - curl -H "Authorization:token $GITHUB_TOKEN" -d "$body" -X POST https://api.github.com/repos/lean-delivery/lean-delivery.github.io-src/commits/$CI_COMMIT_SHA/comments
-    - git config --global user.name "${GITLAB_USER_NAME}"
-    - git config --global user.email "${GITLAB_USER_EMAIL}"
   script:
     - pelican
-    - git submodule deinit --all -f
-    - git submodule init
-    - git submodule update
-    - cd docs/
-    - git pull origin master
-    - cp -a ../output/. .
-    - git add --all
-    - git commit -m "GitLab Runner Push"
-    - git push http://lean-delivery-bot:${LEAN_BOT_TOKEN}@github.com/lean-delivery/lean-delivery.github.io.git HEAD:master
 
   after_script:
     - aws s3 cp output s3://blog-dev-blog-origin/$CI_COMMIT_REF_NAME/$CI_COMMIT_SHA --recursive
@@ -61,10 +50,15 @@ Realese:
     - git config --global user.email "${GITLAB_USER_EMAIL}"
   script:
     - pelican
-    - cp -R output/* docs/
+    - git submodule deinit --all -f
+    - git submodule init
+    - git submodule update
+    - cd docs/
+    - git pull origin master
+    - cp -a ../output/. .
     - git add --all
     - git commit -m "GitLab Runner Push"
-    - git push http://${YOUR_USERNAME}:${GITHUB_TOKEN}@github.com/lean-delivery/lean-delivery.github.io.git HEAD:master
+    - git push http://lean-delivery-bot:${LEAN_BOT_TOKEN}@github.com/lean-delivery/lean-delivery.github.io.git HEAD:master
   only:
     - master
 
