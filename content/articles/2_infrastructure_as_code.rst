@@ -1,4 +1,4 @@
-Benefits of IaC
+Infrastructure as Code. Why you need it.
 #######################
 :date: 2019-08-14 13:50
 :author: Aliaksei Maiseyeu
@@ -27,10 +27,10 @@ up servers and installing software.
 To be continued...
 
 IaC tools
-=========
+---------
 
 Google Cloud Deployment Manager
--------------------------------
+===============================
 
 Deployment Manager is an infrastructure deployment service that
 automates the creation and management of Google Cloud Platform (GCP)
@@ -47,7 +47,7 @@ Cons:
 -  Works only with GCP
 
 Azure Resource Manager
-----------------------
+======================
 
 Azure Resource Manager is the deployment and management service for
 Azure. It provides a management layer that enables you to create,
@@ -64,7 +64,7 @@ Cons:
 -  Works only with Azure
 
 AWS CloudFormation
-------------------
+==================
 
 AWS CloudFormation provides a common language for you to describe and
 provision all the infrastructure resources in your cloud environment.
@@ -82,7 +82,7 @@ Cons:
 -  Works only with AWS
 
 Chef
-----
+====
 
 Chef Infra is a powerful automation platform that transforms
 infrastructure into code. Whether you’re operating in the cloud,
@@ -101,7 +101,7 @@ Cons:
    that is being managed by Chef
 
 Terraform
----------
+=========
 
 Terraform is a tool for building, changing, and versioning
 infrastructure safely and efficiently. Terraform can manage existing and
@@ -124,16 +124,16 @@ Cons:
 -  No build-in rollback capability
 
 Why we choose terraform
-=======================
+-----------------------
 
 `No one like double work
 =) <https://blog.gruntwork.io/why-we-use-terraform-and-not-chef-puppet-ansible-saltstack-or-cloudformation-7989dad2865c>`__
 
 Terraservices / Workspaces / Modules
-====================================
+------------------------------------
 
 Modules
--------
+=======
 
 A module is a container for multiple resources that are used together.
 Every Terraform configuration has at least one module, known as its root
@@ -147,7 +147,7 @@ in separate configurations, allowing resource configurations to be
 packaged and re-used.
 
 Workspaces
-----------
+==========
 
 Each Terraform configuration has an associated backend that defines how
 operations are executed and where persistent data such as the Terraform
@@ -167,7 +167,7 @@ AzureRM - Hashicorp Consul - Google Compute Storage - Local File system
 - Manta - Postgres - Terraform Remote - AWS S3
 
 Terraservices
--------------
+=============
 
 Terraservices concept was presented by Nicki Watt on `"Hashidays London
 2017" <https://www.hashicorp.com/resources/evolving-infrastructure-terraform-opencredo>`__.
@@ -181,6 +181,6 @@ Terraservices concept was presented by Nicki Watt on `"Hashidays London
     start moving to a distributed or a mode state type of setup.
 
 Common terraform examples
-=========================
+-------------------------
 
 TBD
