@@ -38,13 +38,11 @@ resources. Write flexible template and configuration files and use them
 to create deployments that have a variety of GCP services, such as Cloud
 Storage, Compute Engine, and Cloud SQL, configured to work together.
 
-Pros
-^^^^
+Pros:
 
 -  Developed and maintained by cloud provider
 
-Cons
-^^^^
+Cons:
 
 -  Works only with GCP
 
@@ -57,13 +55,11 @@ update, and delete resources in your Azure subscription. You use
 management features, like access control, locks, and tags, to secure and
 organize your resources after deployment.
 
-Pros
-^^^^
+Pros:
 
 -  Developed and maintained by cloud provider
 
-Cons
-^^^^
+Cons:
 
 -  Works only with Azure
 
@@ -77,13 +73,11 @@ file to model and provision, in an automated and secure manner, all the
 resources needed for your applications across all regions and accounts.
 This gives you a single source of truth for your AWS resources.
 
-Pros
-^^^^
+Pros:
 
 -  Developed and maintained by cloud provider
 
-Cons
-^^^^
+Cons:
 
 -  Works only with AWS
 
@@ -96,13 +90,11 @@ on-premises, or in a hybrid environment, Chef Infra automates how
 infrastructure is configured, deployed, and managed across your network,
 no matter its size.
 
-Pros
-^^^^
+Pros:
 
 -  Cloud agnostic
 
-Cons
-^^^^
+Cons:
 
 -  Requires Chef Infra Server to store cookbooks, the policies that are
    applied to nodes, and metadata that describes each registered node
@@ -121,14 +113,12 @@ and then executes it to build the described infrastructure. As the
 configuration changes, Terraform is able to determine what changed and
 create incremental execution plans which can be applied.
 
-Pros
-^^^^
+Pros:
 
 -  Cloud agnostic
 -  Huge community
 
-Cons
-^^^^
+Cons:
 
 -  Terraform state is key and if corrupted it can't be restored
 -  No build-in rollback capability
