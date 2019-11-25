@@ -1,5 +1,9 @@
 Benefits of IaC
-===============
+#######################
+:date: 2019-08-14 13:50
+:author: Aliaksei Maiseyeu
+:tags: non-technical
+:slug: infrastructure_as_code
 
 Problem statement
 -----------------
