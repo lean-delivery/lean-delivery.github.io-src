@@ -4,22 +4,34 @@
 :author: Dzmitry Rudnouski
 
 SonarQube - это инструмент для статического анализа кода. Общее
-представление о нем можно получить из вот этой краткой статьи на
+представление о нем можно получить из вот этой `краткой статьи <https://en.wikipedia.org/wiki/SonarQube>`_ в
 английской википедии. В дополнение к статье подробнее расскажу про
 версии и плагины.
 
 Как отдельное приложение SonarQube доступен в виде бесплатной community
 версии и трех платных
-`версий <https://www.sonarsource.com/plans-and-pricing/>`__ - developer,
+`версий <https://www.sonarsource.com/plans-and-pricing/>`_ - developer,
 enterprise и data center. Кроме этого в наличии платный облачный
-вариант - sonarcloud.io, который, тем не менее, бесплатен для публичных
+вариант - `sonarcloud.io <https://sonarcloud.io/>`_, который, тем не менее, бесплатен для публичных
 проектов. Так что, если вы являетесь владельцем open source проекта на
 GitHub, Bitbucket или Azure DevOps, рекомендую воспользоваться этой
 возможностью (и могу опубликовать краткую инструкцию по настройке).
 Кстати, вот вам живой пример: код сайта, который вы сейчас читаете,
-проверяется в sonarcloud.io -
-https://sonarcloud.io/dashboard?id=lean-delivery_lean-delivery.github.io-src.
+проверяется в sonarcloud.io - `lean-delivery.github.io-src <https://sonarcloud.io/dashboard?id=lean-delivery_lean-delivery.github.io-src>`_.
 
 Из коробки SonarQube предоставляет около 20 своих (коробочных) плагинов,
 в основном языковых, количество меняется от версии к версии. Кроме этого
 доступно около 60 сторонних плагинов различных типов:
+
+-  языковые - например groovy, yaml
+
+-  внешние анализаторы - checkstyle, findbugs, pmd, ansible lint, ...
+
+-  интеграция - например аутентификация через Gitlab, Bitbucket
+
+-  покрытие кода
+
+-  локализация и другие
+
+Стоит сказать, что бесплатная community версия отличается по
+возможностям от бесплатной sonarcloud.io. Вот их сравнение:
