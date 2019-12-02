@@ -5,8 +5,9 @@ Infrastructure as Code. Why you need it.
 :tags: non-technical
 :slug: infrastructure_as_code
 
-Problem statement
------------------
+
+Dawn of the Infrastructure as Code
+----------------------------------
 
 At first, when the trees were taller and the grass was green, it was
 only bare-metal. Each server was a separate physical unit.
@@ -24,10 +25,44 @@ too much time. This situation stimulated the appearance of
 provisioners, which simplified and accelerated the process of setting
 up servers and installing software.
 
-To be continued...
+And now we live in era of cloud computing. Today’s engineers 
+may need a dozen or a hundred servers to accomplish business goals.
+Neednes of new approach became critical.
+
+
+Meet Infrastructure as Code
+---------------------------
+
+Definition:
+
+    Infrastructure as code (IaC) is the process of managing and provisioning
+    computer data centers through machine-readable definition files, rather than
+    physical hardware configuration or interactive configuration tools. [#]_
+
+    --Wikipedia
+
+Abbility to manage infrastructure as code provides a lot of important benefits!
+From this point we can:
+* versioning the infrastructure
+* cover it with tests
+* scale number of environments with the speed of light
+
+
+All this features is available due to of IaC concept main targets:
+
+:reduce price: now you utilize your computing resources with highest efficiency
+:increase velocity: engineers spending more time on the improvements and development
+                    instead of the routine tasks
+:decrease risks: replacing manual operations with automation makes chance
+                 of human error pretty low (if your automation covered by tests ¯\\_(ツ)_/¯ )
+
 
 IaC tools
 ---------
+
+So, you descide to implement Infrastructure as Code.
+
+Now we should choose proper tool, that will match requirements of your project.
 
 Google Cloud Deployment Manager
 ===============================
@@ -123,14 +158,32 @@ Cons:
 -  Terraform state is key and if corrupted it can't be restored
 -  No build-in rollback capability
 
-Why we choose terraform
------------------------
 
-`No one like double work
-=) <https://blog.gruntwork.io/why-we-use-terraform-and-not-chef-puppet-ansible-saltstack-or-cloudformation-7989dad2865c>`__
+Technical diferences of IaC tools
+---------------------------------
 
-Terraservices / Workspaces / Modules
-------------------------------------
+.. epigraph::
+
+   *«Choose wisely, Luke»*
+
+   -- Yoda, Jedi Master
+
+From technical perspective, IaC tools realisations have several variations:
+
+* Mutable Infrastructure vs Immutable Infrastructure
+* Procedural vs Declarative
+* Master vs Masterless
+* Agent vs Agentless
+
+Each of this options has strength and weakness. [#]_
+
+Significant thing should be mentioned: as soon as your IaC will
+describe more than several dozen of resources, migration on another
+tool become the pain somewhere little lower the back and there is no
+any automated tool to relieve this pain.
+
+Few words about Terraform
+-------------------------
 
 Modules
 =======
@@ -145,6 +198,27 @@ module's resources into the configuration in a concise way. Modules can
 also be called multiple times, either within the same configuration or
 in separate configurations, allowing resource configurations to be
 packaged and re-used.
+
+Here is code example that allows to create basic network infrastrustire
+in AWS:
+::
+
+    module "core" {
+      source = "github.com/lean-delivery/tf-module-aws-core.git?ref=1.0.0"
+    
+      project            = "amazing"
+      environment        = "production"
+      availability_zones = ["us-east-1a", "us-east-1b"]
+      vpc_cidr           = "10.0.0.0/8"
+      private_subnets    = ["10.0.1.0/24", "10.0.2.0/24"]
+      public_subnets     = ["10.0.3.0/24", "10.0.4.0/24"]
+    
+      database_subnets             = var.database_subnets
+      create_database_subnet_group = true
+    
+      enable_nat_gateway = true
+    }
+
 
 Workspaces
 ==========
@@ -162,9 +236,16 @@ still has only one backend, but multiple distinct instances of that
 configuration to be deployed without configuring a new backend or
 changing authentication credentials.
 
-Multiple workspaces are currently supported by the following backends: -
-AzureRM - Hashicorp Consul - Google Compute Storage - Local File system
-- Manta - Postgres - Terraform Remote - AWS S3
+Multiple workspaces are currently supported by the following backends:
+
+- AzureRM
+- Hashicorp Consul
+- Google Compute Storage
+- Local File system
+- Manta
+- Postgres
+- Terraform Remote
+- AWS S3
 
 Terraservices
 =============
@@ -184,3 +265,7 @@ Common terraform examples
 -------------------------
 
 TBD
+
+
+.. [#] Wittig, Andreas; Wittig, Michael (2016). Amazon Web Services in Action. Manning Press. p. 93. ISBN 978-1-61729-288-0.
+.. [#] https://blog.gruntwork.io/why-we-use-terraform-and-not-chef-puppet-ansible-saltstack-or-cloudformation-7989dad2865c
