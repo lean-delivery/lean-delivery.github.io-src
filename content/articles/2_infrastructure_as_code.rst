@@ -43,9 +43,9 @@ Definition:
 
 Abbility to manage infrastructure as code provides a lot of important benefits!
 From this point we can:
-* versioning the infrastructure
-* cover it with tests
-* scale number of environments with the speed of light
+- versioning the infrastructure
+- cover it with tests
+- scale number of environments with the speed of light
 
 
 All this features is available due to of IaC concept main targets:
