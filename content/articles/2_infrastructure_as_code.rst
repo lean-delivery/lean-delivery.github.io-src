@@ -261,29 +261,29 @@ Divide and rule
 ~~~~~~~~~~~~~~~
 
 According to Terraservices concept, we divide our Terraform code
-into several groups:
+into several groups: ::
 
-0. terraform state storage infrastructure
-1. core infra: VPC, Subnets, routing tables, etc.
-2. common resources
-    * bastion instance (if needed)
-    * RDS
-    * network connectivity (if needed)
-3. infrastructure for our new service
+    0. terraform state storage infrastructure
+    1. core infra: VPC, Subnets, routing tables, etc.
+    2. common resources
+        * bastion instance (if needed)
+        * RDS
+        * network connectivity (if needed)
+    3. infrastructure for our new service
 
 Last point could contain several separate Terraservices, depending 
-on your target infrastructure:
+on your target infrastructure: ::
 
-0. terraform state storage infrastructure (S3 and DynamoDB table)
-1. core infra (VPC, Subnets, routing tables, etc.)
-2. common resources
-    * bastion instance (if needed)
-    * RDS
-    * network connectivity (if needed)
-3. infrastructure for our new service
-    * shared resources
-    * service's backend
-    * service's frontend
+    0. terraform state storage infrastructure (S3 and DynamoDB table)
+    1. core infra (VPC, Subnets, routing tables, etc.)
+    2. common resources
+        * bastion instance (if needed)
+        * RDS
+        * network connectivity (if needed)
+    3. infrastructure for our new service
+        * shared resources
+        * service's backend
+        * service's frontend
 
 
 Notice
