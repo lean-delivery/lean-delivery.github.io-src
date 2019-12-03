@@ -235,6 +235,7 @@ Terraservices concept was presented by Nicki Watt on `"Hashidays London
 After almost two years of using Terraform we finally found our best practices.
 And now we will share it with you.
 
+
 Assumption
     Let's use in this example AWS as cloud provider
 
@@ -265,6 +266,7 @@ into several groups:
 0. terraform state storage infrastructure
 1. core infra: VPC, Subnets, routing tables, etc.
 2. common resources
+
     1. bastion instance (if needed)
     2. RDS
     3. network connectivity (if needed)
@@ -276,13 +278,16 @@ on your target infrastructure:
 0. terraform state storage infrastructure (S3 and DynamoDB table)
 1. core infra (VPC, Subnets, routing tables, etc.)
 2. common resources
+
     1. bastion instance (if needed)
     2. RDS
     3. network connectivity (if needed)
 3. infrastructure for our new service
+
     1. shared resources
     2. service's backend
     3. service's frontend
+
 
 Notice
     If you want to separate Production and non-Production environments 
