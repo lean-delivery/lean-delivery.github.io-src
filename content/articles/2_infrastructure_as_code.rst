@@ -1,8 +1,8 @@
 Infrastructure as Code. Why you need it.
 ##############################################
-:date: 2019-11-25 14:20
+:date: %Y-%m-%d %H:%M
 :author: Aliaksei Maiseyeu
-:tags: non-technical
+:tags: technical
 :slug: infrastructure_as_code
 
 
@@ -51,11 +51,11 @@ From this point we can:
 
 All this features is available due to of IaC concept main targets:
 
-:reduce price: now you utilize your computing resources with highest efficiency
-:increase velocity: engineers spending more time on the improvements and development
-                    instead of the routine tasks
-:decrease risks: replacing manual operations with automation makes chance
-                 of human error pretty low (if your automation covered by tests ¯\\_(ツ)_/¯ )
+- **reduce price**: now you utilize your computing resources with highest efficiency
+- **increase velocity**: engineers spending more time on the improvements and development
+  instead of the routine tasks
+- **decrease risks**: replacing manual operations with automation makes chance
+  of human error pretty low (if your automation covered by tests ¯\\_(ツ)_/¯ )
 
 
 IaC tools
@@ -65,8 +65,11 @@ So, you descide to implement Infrastructure as Code.
 
 Now we should choose proper tool, that will match requirements of your project.
 
+Cloud vendor's tools
+====================
+
 Google Cloud Deployment Manager
-===============================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Deployment Manager is an infrastructure deployment service that
 automates the creation and management of Google Cloud Platform (GCP)
@@ -74,16 +77,9 @@ resources. Write flexible template and configuration files and use them
 to create deployments that have a variety of GCP services, such as Cloud
 Storage, Compute Engine, and Cloud SQL, configured to work together.
 
-Pros:
-
--  Developed and maintained by cloud provider
-
-Cons:
-
--  Works only with GCP
 
 Azure Resource Manager
-======================
+~~~~~~~~~~~~~~~~~~~~~~
 
 Azure Resource Manager is the deployment and management service for
 Azure. It provides a management layer that enables you to create,
@@ -91,16 +87,9 @@ update, and delete resources in your Azure subscription. You use
 management features, like access control, locks, and tags, to secure and
 organize your resources after deployment.
 
-Pros:
-
--  Developed and maintained by cloud provider
-
-Cons:
-
--  Works only with Azure
 
 AWS CloudFormation
-==================
+~~~~~~~~~~~~~~~~~~
 
 AWS CloudFormation provides a common language for you to describe and
 provision all the infrastructure resources in your cloud environment.
@@ -109,16 +98,12 @@ file to model and provision, in an automated and secure manner, all the
 resources needed for your applications across all regions and accounts.
 This gives you a single source of truth for your AWS resources.
 
-Pros:
 
--  Developed and maintained by cloud provider
-
-Cons:
-
--  Works only with AWS
+3rd party tools
+===============
 
 Chef
-====
+~~~~
 
 Chef Infra is a powerful automation platform that transforms
 infrastructure into code. Whether you’re operating in the cloud,
@@ -126,18 +111,9 @@ on-premises, or in a hybrid environment, Chef Infra automates how
 infrastructure is configured, deployed, and managed across your network,
 no matter its size.
 
-Pros:
-
--  Cloud agnostic
-
-Cons:
-
--  Requires Chef Infra Server to store cookbooks, the policies that are
-   applied to nodes, and metadata that describes each registered node
-   that is being managed by Chef
 
 Terraform
-=========
+~~~~~~~~~
 
 Terraform is a tool for building, changing, and versioning
 infrastructure safely and efficiently. Terraform can manage existing and
@@ -148,16 +124,6 @@ execution plan describing what it will do to reach the desired state,
 and then executes it to build the described infrastructure. As the
 configuration changes, Terraform is able to determine what changed and
 create incremental execution plans which can be applied.
-
-Pros:
-
--  Cloud agnostic
--  Huge community
-
-Cons:
-
--  Terraform state is key and if corrupted it can't be restored
--  No build-in rollback capability
 
 
 Technical diferences of IaC tools
@@ -262,11 +228,121 @@ Terraservices concept was presented by Nicki Watt on `"Hashidays London
     environment. And typically, if you haven't done so already, you will
     start moving to a distributed or a mode state type of setup.
 
-Common terraform examples
--------------------------
+
+"Terraform power, on!"
+----------------------
+
+After almost two years of using Terraform we finally found our best practices.
+And now we will share it with you.
+
+Assumption
+    Let's use in this example AWS as cloud provider
+
+
+Classic case
+============
+
+We should prepare infrastructure for new service. That includes:
+
+- several EC2 instances for backend and frontend
+- some of this instances should be balanced with ALB
+- RDS
+- VPC for all this stuff with subnets, routing tables, etc.
+
+
+Solution
+========
+
+Assumption
+    Let's use in this example AWS S3 as starage for Terraform state files
+
+Divide and rule
+~~~~~~~~~~~~~~~
+
+According to Terraservices concept, we divide our Terraform code
+into several groups:
+
+0. terraform state storage infrastructure
+1. core infra: VPC, Subnets, routing tables, etc.
+2. common resources
+    1. bastion instance (if needed)
+    2. RDS
+    3. network connectivity (if needed)
+3. infrastructure for our new service
+
+Last point could contain several separate Terraservices, depending 
+on your target infrastructure:
+
+0. terraform state storage infrastructure (S3 and DynamoDB table)
+1. core infra (VPC, Subnets, routing tables, etc.)
+2. common resources
+    1. bastion instance (if needed)
+    2. RDS
+    3. network connectivity (if needed)
+3. infrastructure for our new service
+    1. shared resources
+    2. service's backend
+    3. service's frontend
+
+Notice
+    If you want to separate Production and non-Production environments 
+    by placing them in different accounts you should move Terraform
+    backend configuration from ``*.tf`` files ti the separate ``*.hcl`` files.
+    This allows you to choose required backend on ``terraform init`` step:
+
+    ``user@host ~$ terraform init -backend-config=/path/to/your/tf_backend_config.hcl``
+
+Catalog tree in your repository will looks like: ::
+
+    /repo_folder
+    ├── 0_terraform_infra
+    │   ├── main.tf
+    │   ├── outputs.tf
+    │   ├── terraform.tfstate.d
+    │   │   ├── nonprod
+    │   │   │   ├── terraform.tfstate
+    │   │   │   └── terraform.tfstate.backup
+    │   │   └── prod
+    │   │       ├── terraform.tfstate
+    │   │       └── terraform.tfstate.backup
+    │   ├── tfvars
+    │   │   ├── b2b
+    │   │   │   ├── nonprod.tfvars
+    │   │   │   └── prod.tfvars
+    │   │   └── pim
+    │   │       ├── nonprod.tfvars
+    │   │       └── prod.tfvars
+    │   ├── variables.tf
+    │   └── versions.tf
+    ├── 1_core
+    │   ├── main.tf
+    │   ├── output.tf
+    │   ├── tfvars
+    │   │   ├── nonprod-eu-west-1.tfvars
+    │   │   └── prod-eu-west-1.tfvars
+    │   ├── variables.tf
+    │   └── versions.tf
+    ├── 2_bastion
+    ├── 2_database
+    ├── 2_network_connectivity_b2b
+    ├── 3.1_shared_resources
+    ├── 3.2_backend_infra
+    ├── 3.2_frontend_infra
+    ├── nonprod.hcl
+    └── prod.hcl
+
+Attentive readers may ask: "Why you store tfstate files for 0_terraform_infra in your git repository?"
+There is an answer: code in 0_terraform_infra perform creation of S3 for our Terraform backend and 
+untill it not exist we have no any other place to store tfstate files. This files doesn't contain
+any sensetive data so we don't breaks git best practices (I mean "never store any secrets in your repository").
+
+"By the power of Worspaces!"
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 TBD
 
+Sources
+-------
 
 .. [#] Wittig, Andreas; Wittig, Michael (2016). Amazon Web Services in Action. Manning Press. p. 93. ISBN 978-1-61729-288-0.
 .. [#] https://blog.gruntwork.io/why-we-use-terraform-and-not-chef-puppet-ansible-saltstack-or-cloudformation-7989dad2865c
