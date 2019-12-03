@@ -65,65 +65,20 @@ So, you descide to implement Infrastructure as Code.
 
 Now we should choose proper tool, that will match requirements of your project.
 
-Cloud vendor's tools
-====================
+Cloud vendor's tools short-list:
 
-Google Cloud Deployment Manager
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Deployment Manager is an infrastructure deployment service that
-automates the creation and management of Google Cloud Platform (GCP)
-resources. Write flexible template and configuration files and use them
-to create deployments that have a variety of GCP services, such as Cloud
-Storage, Compute Engine, and Cloud SQL, configured to work together.
+- Google Cloud Deployment Manager
+- Azure Resource Manager
+- AWS CloudFormation
 
 
-Azure Resource Manager
-~~~~~~~~~~~~~~~~~~~~~~
+3rd party tools short-list:
 
-Azure Resource Manager is the deployment and management service for
-Azure. It provides a management layer that enables you to create,
-update, and delete resources in your Azure subscription. You use
-management features, like access control, locks, and tags, to secure and
-organize your resources after deployment.
+- Chef
+- Terraform
 
 
-AWS CloudFormation
-~~~~~~~~~~~~~~~~~~
-
-AWS CloudFormation provides a common language for you to describe and
-provision all the infrastructure resources in your cloud environment.
-CloudFormation allows you to use programming languages or a simple text
-file to model and provision, in an automated and secure manner, all the
-resources needed for your applications across all regions and accounts.
-This gives you a single source of truth for your AWS resources.
-
-
-3rd party tools
-===============
-
-Chef
-~~~~
-
-Chef Infra is a powerful automation platform that transforms
-infrastructure into code. Whether you’re operating in the cloud,
-on-premises, or in a hybrid environment, Chef Infra automates how
-infrastructure is configured, deployed, and managed across your network,
-no matter its size.
-
-
-Terraform
-~~~~~~~~~
-
-Terraform is a tool for building, changing, and versioning
-infrastructure safely and efficiently. Terraform can manage existing and
-popular service providers as well as custom in-house solutions.
-Configuration files describe to Terraform the components needed to run a
-single application or your entire datacenter. Terraform generates an
-execution plan describing what it will do to reach the desired state,
-and then executes it to build the described infrastructure. As the
-configuration changes, Terraform is able to determine what changed and
-create incremental execution plans which can be applied.
+Advantage of 3rd party tools is possibility to manage several clouds.
 
 
 Technical diferences of IaC tools
@@ -326,7 +281,7 @@ Catalog tree in your repository will looks like: ::
     │   └── versions.tf
     ├── 2_bastion
     ├── 2_database
-    ├── 2_network_connectivity_b2b
+    ├── 2_network_connectivity_vpn
     ├── 3.1_shared_resources
     ├── 3.2_backend_infra
     ├── 3.2_frontend_infra
@@ -341,7 +296,7 @@ any sensetive data so we don't breaks git best practices (I mean "never store an
 "By the power of Worspaces!"
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-TBD
+
 
 Sources
 -------
