@@ -212,6 +212,16 @@ Solution
 Assumption
     Let's use in this example AWS S3 as starage for Terraform state files
 
+
+No one like meaningless duplication
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In our approach we use data inheritance from one terraservice to another.
+It is possible with Terraform data source ``terraform_remote_state``.
+Throu it we can recive any data, outputed in terraservices that already applied. As a result,
+in each new terraservice we should manually define only few variables, that are specific for it.
+
+
 Divide and rule
 ~~~~~~~~~~~~~~~
 
@@ -247,7 +257,7 @@ Notice
     backend configuration from ``*.tf`` files ti the separate ``*.hcl`` files.
     This allows you to choose required backend on ``terraform init`` step:
 
-    ``user@host ~$ terraform init -backend-config=/path/to/your/tf_backend_config.hcl``
+    ``[user@host ~] $ terraform init -backend-config=/path/to/your/tf_backend_config.hcl``
 
 Catalog tree in your repository will looks like: ::
 
@@ -256,26 +266,22 @@ Catalog tree in your repository will looks like: ::
     │   ├── main.tf
     │   ├── outputs.tf
     │   ├── terraform.tfstate.d
-    │   │   ├── nonprod
+    │   │   ├── dev
     │   │   │   ├── terraform.tfstate
     │   │   │   └── terraform.tfstate.backup
     │   │   └── prod
     │   │       ├── terraform.tfstate
     │   │       └── terraform.tfstate.backup
     │   ├── tfvars
-    │   │   ├── b2b
-    │   │   │   ├── nonprod.tfvars
-    │   │   │   └── prod.tfvars
-    │   │   └── pim
-    │   │       ├── nonprod.tfvars
-    │   │       └── prod.tfvars
+    │   │   ├── dev.tfvars
+    │   │   └── prod.tfvars
     │   ├── variables.tf
     │   └── versions.tf
     ├── 1_core
     │   ├── main.tf
     │   ├── output.tf
     │   ├── tfvars
-    │   │   ├── nonprod-eu-west-1.tfvars
+    │   │   ├── dev-us-east-1.tfvars
     │   │   └── prod-eu-west-1.tfvars
     │   ├── variables.tf
     │   └── versions.tf
@@ -285,7 +291,7 @@ Catalog tree in your repository will looks like: ::
     ├── 3.1_shared_resources
     ├── 3.2_backend_infra
     ├── 3.2_frontend_infra
-    ├── nonprod.hcl
+    ├── dev.hcl
     └── prod.hcl
 
 Attentive readers may ask: "Why you store tfstate files for 0_terraform_infra in your git repository?"
@@ -293,9 +299,38 @@ There is an answer: code in 0_terraform_infra perform creation of S3 for our Ter
 untill it not exist we have no any other place to store tfstate files. This files doesn't contain
 any sensetive data so we don't breaks git best practices (I mean "never store any secrets in your repository").
 
+
 "By the power of Worspaces!"
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Allright, we have Terraform code for our infrastructure. But it should manage several environments, prod and dev, at least.
+Terraform workspaces literally designed for this!
+But first of all let's agree about naming convention.
+
+Assumption
+    Workspace name will contain environment name and AWS Region name, eg ``prod-eu-west-1`` and ``dev-us-east-1``.
+
+For ``prod`` and ``dev`` environments we should use different input values, thats why each environment should have separate ``*.tfvars`` file.
+Let's name they as according worspace name to avoid confusion: ``prod-eu-west-1.tfvars`` and ``dev-us-east-1.tfvars``.
+
+Setup sequence example for ``1_core``: ::
+
+    [user@host 1_core] $ terraform init -backend-config=../dev.hcl                  # Initialize backend for dev environment
+    [user@host 1_core] $ terraform workspace new dev-us-east-1                      # Create new workspace for dev environment
+    [user@host 1_core] $ terraform apply -var-file=tfvars/dev-us-east-1.tfvars      # Create dev infrastructure by applying Terraform code
+    [user@host 1_core] $ rm -rf .terraform                                          # Remove backend configuration for dev env
+    [user@host 1_core] $ terraform init -backend-config=../prod.hcl                 # Initialize backend for production environment
+    [user@host 1_core] $ terraform workspace new prod-eu-west-1                     # Create new workspace for production environment
+    [user@host 1_core] $ terraform apply -var-file=tfvars/prod-eu-west-1.tfvars     # Create prod infrastructure by applying Terraform code
+
+
+"Ifrastructure, assemble!"
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Using all described hints gives you flexible control on each level of
+your environments. Competent separation of your infrastructure code
+will allow you update any part of infrastructure safely, with minimum
+risks and lowest affect on other parts of service.
 
 
 Sources
