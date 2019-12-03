@@ -12,22 +12,22 @@ Dawn of the Infrastructure as Code
 At first, when the trees were taller and the grass was green, it was
 only bare-metal. Each server was a separate physical unit.
 Those were the times of simple solutions: you connect the server to the
-network and power source, connect via telnet / ssh, install all the
-necessary software, set up cron-jobs for alerts and you're done.
+network and power source, login via telnet / ssh, install all the
+necessary software, set up cron-jobs for alerts and you're done!
 
-Then it was time for virtualization. From the early 2000s, the IT industry
+Then it came time for virtualization. From the early 2000s, the IT industry
 began to plunge into this amazing world, without even assuming how far this will go.
 
-In the beginning, the approach used when working with bare-metal
-was still good. Only instead of physical servers became virtual.
+In the beginning, the same approach as when working with bare-metal
+was still good. Only instead of physical servers you had virtual ones.
 Over time, the number of servers has grown. Old methods began to take
 too much time. This situation stimulated the appearance of
 provisioners, which simplified and accelerated the process of setting
 up servers and installing software.
 
-And now we live in era of cloud computing. Today’s engineers 
+And now we live in the era of cloud computing. Today’s engineers 
 may need a dozen or a hundred servers to accomplish business goals.
-Neednes of new approach became critical.
+Need for new approach became critical.
 
 
 Meet Infrastructure as Code
@@ -44,7 +44,7 @@ Definition:
 Abbility to manage infrastructure as code provides a lot of important benefits!
 From this point we can:
 
-* versioning the infrastructure
+* infrastructure versioning
 * cover it with tests
 * scale number of environments with the speed of light
 
@@ -144,7 +144,9 @@ From technical perspective, IaC tools realisations have several variations:
 
 Each of this options has strength and weakness. [#]_
 
-Significant thing should be mentioned: as soon as your IaC will
+Along with that, Terraform aims to be industry-wide acknowledged mainstream as of now (Dec 2019)
+
+Significant point should be mentioned: as soon as your IaC will
 describe more than several dozen of resources, migration on another
 tool become the pain somewhere little lower the back and there is no
 any automated tool to relieve this pain.
@@ -255,7 +257,7 @@ Solution
 ========
 
 Assumption
-    Let's use in this example AWS S3 as starage for Terraform state files
+    Let's use in this example AWS S3 as a storage for Terraform state files
 
 Divide and rule
 ~~~~~~~~~~~~~~~
@@ -289,7 +291,7 @@ on your target infrastructure: ::
 Notice
     If you want to separate Production and non-Production environments 
     by placing them in different accounts you should move Terraform
-    backend configuration from ``*.tf`` files ti the separate ``*.hcl`` files.
+    backend configuration from ``*.tf`` files to the separate ``*.hcl`` files.
     This allows you to choose required backend on ``terraform init`` step:
 
     ``user@host ~$ terraform init -backend-config=/path/to/your/tf_backend_config.hcl``
