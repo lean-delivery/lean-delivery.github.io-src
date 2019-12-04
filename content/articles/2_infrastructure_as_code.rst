@@ -261,40 +261,10 @@ Notice
 
     ``[user@host ~] $ terraform init -backend-config=/path/to/your/tf_backend_config.hcl``
 
-Catalog tree in your repository will looks like: ::
+Catalog tree in your repository will looks like:
 
-    /repo_folder
-    ├── 0_terraform_infra
-    │   ├── main.tf
-    │   ├── outputs.tf
-    │   ├── terraform.tfstate.d
-    │   │   ├── dev
-    │   │   │   ├── terraform.tfstate
-    │   │   │   └── terraform.tfstate.backup
-    │   │   └── prod
-    │   │       ├── terraform.tfstate
-    │   │       └── terraform.tfstate.backup
-    │   ├── tfvars
-    │   │   ├── dev.tfvars
-    │   │   └── prod.tfvars
-    │   ├── variables.tf
-    │   └── versions.tf
-    ├── 1_core
-    │   ├── main.tf
-    │   ├── output.tf
-    │   ├── tfvars
-    │   │   ├── dev-us-east-1.tfvars
-    │   │   └── prod-eu-west-1.tfvars
-    │   ├── variables.tf
-    │   └── versions.tf
-    ├── 2_bastion
-    ├── 2_database
-    ├── 2_network_connectivity_vpn
-    ├── 3.1_shared_resources
-    ├── 3.2_backend_infra
-    ├── 3.2_frontend_infra
-    ├── dev.hcl
-    └── prod.hcl
+.. image:: {filename}/images/infrastructure_as_code_file_tree.png
+
 
 Attentive readers may ask: "Why you store tfstate files for 0_terraform_infra in your git repository?"
 There is an answer: code in 0_terraform_infra perform creation of S3 for our Terraform backend and 
