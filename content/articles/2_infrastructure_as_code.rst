@@ -301,6 +301,9 @@ There is an answer: code in 0_terraform_infra perform creation of S3 for our Ter
 untill it not exist we have no any other place to store tfstate files. This files doesn't contain
 any sensetive data so we don't breaks git best practices (I mean "never store any secrets in your repository").
 
+Also ``0_terraform_infra`` creates Terraform backend config file (``prod.hcl``, ``dev.hcl``) which will be used
+for all futhure terraservices. Name of file will be generated based on workspace name.
+
 
 "By the power of Worspaces!"
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -326,8 +329,8 @@ Setup sequence example for ``1_core``: ::
     [user@host 1_core] $ terraform apply -var-file=tfvars/prod-eu-west-1.tfvars     # Create prod infrastructure by applying Terraform code
 
 
-"Ifrastructure, assemble!"
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+"Infrastructure, assemble!"
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Using all described hints gives you flexible control on each level of
 your environments. Competent separation of your infrastructure code
