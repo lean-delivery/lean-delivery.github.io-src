@@ -143,6 +143,10 @@ in AWS:
       enable_nat_gateway = true
     }
 
+More of useful Terraform modules could be finded at Lean Delivery project on GitHub:
+
+https://github.com/lean-delivery
+
 
 Workspaces
 ==========
