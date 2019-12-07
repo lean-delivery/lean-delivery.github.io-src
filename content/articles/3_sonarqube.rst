@@ -128,7 +128,8 @@ Gitlab и т.д.
 - токен, который вы добавляли admin пользователю
 
 Кстати, для установки Jenkins я рекомендую использовать нашу роль `ansible-jenkins <https://github.com/lean-delivery/ansible-role-jenkins>`_, которая кроме установки Jenkins может также установить упомянутый плагин и добавить SonarQube Server в настройках.
-Иногда вместо плагина используют отдельно установленный `sonar-scanner <https://docs.sonarqube.org/latest/analysis/scan/sonarscanner/>`_, а параметры запуска указывают в файле sonar-project.properties. На мой взгляд удобнее пользоваться плагином, а параметры запуска указывать в пайплайне.
+Иногда вместо плагина используют отдельно установленный `sonar-scanner <https://docs.sonarqube.org/latest/analysis/scan/sonarscanner/>`_, а параметры запуска сканера указывают в файле sonar-project.properties.
+На мой взгляд удобнее пользоваться плагином, а параметры запуска передавать прямо в пайплайне.
 
 **Пайплайн.**
 
