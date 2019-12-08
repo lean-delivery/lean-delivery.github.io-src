@@ -1,12 +1,10 @@
-Как встроить SonarQube в CI процесс.
+How to add SonarQube to CI process
 ##############################################
 :date: 2019-11-26 17:56
 :author: Dzmitry Rudnouski
 
-**SonarQube** - это инструмент для статического анализа кода. Общее
-представление о нем можно получить из вот этой `краткой статьи <https://en.wikipedia.org/wiki/SonarQube>`_ в
-английской википедии. В дополнение к статье подробнее расскажу про
-версии и плагины.
+**SonarQube** - is a tool for static code analysis. General concept you may get from this `short article <https://en.wikipedia.org/wiki/SonarQube>`_ on
+wiki. In addition to article I'll tell more about SonarQube versions and plugins.
 
 Как отдельное приложение SonarQube доступен в виде бесплатной community
 версии и трех платных
