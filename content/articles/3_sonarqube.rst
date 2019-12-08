@@ -42,34 +42,30 @@ There are several ways to install SonarQube.
 Let me tell more about last approach. Look through the readme, get playbook example and adjust it to your needs. Playbook installs SonarQube with the all requirements: java (using our
 `ansible-java <https://github.com/lean-delivery/ansible-role-java>`_ role), postgresql database and nginx (for https).
 
-Кстати, об упомянутой java роли. Она вам может пригодится не только для установки SonarQube, но и во многих других случаях. Это лучшая роль LDI проекта и лучшая java роль на Ansible Galaxy. Обратите внимание на количество поддерживаемых разновидностей JDK/JRE и на количество поддерживаемых платформ.
+Speaking of the mentioned java role. You may use it not only for SonarQube installation, but in lot of other cases. It's the best role of LDI project and the best java role on Ansible Galaxy.
+Pay your attention on amount of supported JDK/JRE types and amount of supported platforms.
 
-Для установки SonarQube потребуется машина минимум с 4 Gb памяти – например t3a.medium в AWS.
+To install SonarQube you need instance with at least 4 Gb memory – e.g. t3a.medium в AWS.
 
-Обратите внимание, что кроме установки, роль может выполнить некоторые конфигурационные действия:
+Note that besides installation role is able to do some configuration:
 
--  смигрировать базу – потребуется, если у вас уже есть SonarQube, а вы
-   устанавливаете более свежую версию поверх
--  добавить вебхук на Jenkins (об этом ниже)
--  импортировать кастомные профили с правилами (об этом тоже ниже)
--  настроить аутентификацию через LDAP
+-  database migration – required when you've got an installed SonarQube and is going to update it to new version
+-  add Jenkins webhook (see below in the article)
+-  import custom quality profiles (see below also)
+-  configure LDAP authentication
 
-**Конфигурирование.**
+**Configuration.**
 
-Первое, что надо сделать – сменить дефолтный пароль для admin
-пользователя в **Administration > Security > Users**. А вот что бывает,
-когда об этом забываешь - `UK cell giant EE left a critical code system
+First thing you need to do – change default password for admin user in **Administration > Security > Users**. And here what happens when you forget it - `UK cell giant EE left a critical code system
 exposed with a default
 password. <https://www.zdnet.com/article/mobile-giant-left-code-system-online-default-password/>`_
-Кстати, мы планируем добавить в роль возможность смены дефолтного пароля.
+By the way we are going to add to role ability to change default password.
 
-Кроме смены пароля добавьте токен admin пользователю, он понадобится в
-дальнейшем.
+In addition to password change add token for admin user, you need it later.
 
-Постороннее лицо уже не может зайти под дефолтными admin/admin, но все еще способно видеть ваш код, не заходя в систему.
-Поэтому следующий шаг – закрытие гостевого доступа через меню
-**Administration > Configuration > Security > Force user
-authentication.** Эта возможность тоже будет добавлена в роль.
+Now outsiders are not able to login with default admin/admin, but still able to view your code without login.
+So next step is closing guest access in **Administration > Configuration > Security > Force user
+authentication.** This feature will be also added to role.
 
 Если в SonarQube кроме вас будут ходить и другие члены команды, имеет смысл
 настроить аутентификацию через LDAP (есть в роли), GitHub, Bitbucket,
