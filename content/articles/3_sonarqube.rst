@@ -13,38 +13,34 @@ So if you own open source project on GitHub, Bitbucket or Azure DevOps I would r
 By the way, here is live example: code of the site you are reading now is analyzed in sonarcloud.io -
 `lean-delivery.github.io-src <https://sonarcloud.io/dashboard?id=lean-delivery_lean-delivery.github.io-src>`_.
 
-Out of the box SonarQube provides near 20 plugins, almost all of them are language plugins, their count may vary among the versions. Also there are near 60 other plugins of different types:
+Out of the box SonarQube provides near 20 plugins, almost all of them are language plugins, their count may vary among the versions. Also there are near 60 third-party plugins of different types:
 
--  языковые - например groovy, yaml
--  внешние анализаторы - например checkstyle, findbugs, pmd, ansible lint
--  интеграция - например аутентификация через Gitlab, Bitbucket
--  покрытие кода
--  локализация и другие
+-  language - e.g. groovy, yaml
+-  external analyzers - e.g. checkstyle, findbugs, pmd, ansible lint
+-  integration - e.g. Gitlab and Bitbucket authentication
+-  code coverage
+-  localization and other
 
-Стоит сказать, что бесплатная community версия отличается по
-возможностям от бесплатной sonarcloud.io. Вот их сравнение:
+It worth saying that free community version differs by capabilities from free sonarcloud.io. Here is comparison:
 
 .. image:: {filename}/images/sonarqube_table1.png
 
-Дальше в этой статье мы будем говорить о бесплатной community версии.
-Актульные версии на данный момент – 7.9.1 LTS и 8.0.
+Further in this article I'll tell about free community version.
+Current versions now are 7.9.1 LTS и 8.0.
 
-**Установка.**
+**Installation.**
 
-Установить SonarQube можно несколькими способами.
+There are several ways to install SonarQube.
 
-1. Вручную. Просто не советую тратить на это время.
+1. Manually. Just don't waste your time.
 
-2. Взять официальный `образ <https://hub.docker.com/_/sonarqube>`_ с
-   dockerhub. Сам я этот способ не использую, но если интересно, могу
-   сравнить с третьим способом.
+2. Get official docker `image <https://hub.docker.com/_/sonarqube>`_ at
+   dockerhub. I don't use this way, but if you are interested I can compare it with the next one.
 
-3. Установить с помощью нашей `ansible-sonarqube <https://github.com/lean-delivery/ansible-role-sonarqube>`_ роли.
+3. Install with our `ansible-sonarqube <https://github.com/lean-delivery/ansible-role-sonarqube>`_ role.
 
-Расскажу подробнее про последний способ. Прочтите readme, возьмите оттуда
-пример плейбуки и подправьте ее под свои нужды. Она установит SonarQube
-и то, что ему требуется для работы: java (используя нашу
-`ansible-java <https://github.com/lean-delivery/ansible-role-java>`_ роль), postgresql базу и nginx (для https).
+Let me tell more about last approach. Look through the readme, get playbook example and adjust it to your needs. Playbook installs SonarQube with the all requirements: java (using our
+`ansible-java <https://github.com/lean-delivery/ansible-role-java>`_ role), postgresql database and nginx (for https).
 
 Кстати, об упомянутой java роли. Она вам может пригодится не только для установки SonarQube, но и во многих других случаях. Это лучшая роль LDI проекта и лучшая java роль на Ansible Galaxy. Обратите внимание на количество поддерживаемых разновидностей JDK/JRE и на количество поддерживаемых платформ.
 
