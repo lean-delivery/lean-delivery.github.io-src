@@ -6,18 +6,14 @@ How to add SonarQube to CI process
 **SonarQube** - is a tool for static code analysis. General concept you may get from this short `wiki article <https://en.wikipedia.org/wiki/SonarQube>`_.
 In addition to it I'll tell bit more about SonarQube versions and plugins.
 
-Как отдельное приложение SonarQube доступен в виде бесплатной community
-версии и трех платных
-`версий <https://www.sonarsource.com/plans-and-pricing/>`_ - developer,
-enterprise и data center. Кроме этого, в наличии платный SaaS
-вариант - `sonarcloud.io <https://sonarcloud.io/>`_, который, тем не менее, бесплатен для публичных
-проектов. Так что, если вы являетесь владельцем open source проекта на
-GitHub, Bitbucket или Azure DevOps, рекомендую воспользоваться этой
-возможностью (и могу опубликовать краткую инструкцию по настройке).
-Кстати, вот вам живой пример: код сайта, который вы сейчас читаете,
-проверяется в sonarcloud.io - `lean-delivery.github.io-src <https://sonarcloud.io/dashboard?id=lean-delivery_lean-delivery.github.io-src>`_.
+As a standalone app SonarQube is available as free community version and 3 paid
+`versions <https://www.sonarsource.com/plans-and-pricing/>`_ - developer,
+enterprise и data center. In addition, there is a paid SaaS solution - `sonarcloud.io <https://sonarcloud.io/>`_, which is free however for public projects.
+So if you own open source project on GitHub, Bitbucket or Azure DevOps I would recommend to take this opportunity (and I can publish setup instructions).
+By the way, here is live example: code of the site you are reading now is analyzed in sonarcloud.io -
+`lean-delivery.github.io-src <https://sonarcloud.io/dashboard?id=lean-delivery_lean-delivery.github.io-src>`_.
 
-Из коробки SonarQube предоставляет около 20 своих (коробочных) плагинов,
+Из коробки SonarQube предоставляет около 20 своих плагинов,
 в основном языковых, количество меняется от версии к версии. Кроме этого
 доступно около 60 сторонних плагинов различных типов:
 
