@@ -13,9 +13,7 @@ So if you own open source project on GitHub, Bitbucket or Azure DevOps I would r
 By the way, here is live example: code of the site you are reading now is analyzed in sonarcloud.io -
 `lean-delivery.github.io-src <https://sonarcloud.io/dashboard?id=lean-delivery_lean-delivery.github.io-src>`_.
 
-Из коробки SonarQube предоставляет около 20 своих плагинов,
-в основном языковых, количество меняется от версии к версии. Кроме этого
-доступно около 60 сторонних плагинов различных типов:
+Out of the box SonarQube provides near 20 plugins, almost all of them are language plugins, their count may vary among the versions. Also there are near 60 other plugins of different types:
 
 -  языковые - например groovy, yaml
 -  внешние анализаторы - например checkstyle, findbugs, pmd, ansible lint
