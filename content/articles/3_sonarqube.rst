@@ -67,68 +67,62 @@ Now outsiders are not able to login with default admin/admin, but still able to 
 So next step is closing guest access in **Administration > Configuration > Security > Force user
 authentication.** This feature will be also added to role.
 
-Если в SonarQube кроме вас будут ходить и другие члены команды, имеет смысл
-настроить аутентификацию через LDAP (есть в роли), GitHub, Bitbucket,
-Gitlab и т.д.
+If access to SonarQube is required not only for you but for other team members also, it makes sense to configure LDAP authentication (this option exists in the role) or authentication
+via GitHub, Bitbucket, Gitlab, etc.
 
-Переходим к настройке языковых профилей в меню **Quality Profiles**.
-Каждый языковой плагин предоставляет свой built-in профиль – это просто набор активных и неактивных правил, в соответсвии с которыми проверяется код.
-Кроме правил в профиле могут находиться шаблоны, из которых вы можете создать свои правила.
-Вот пример – built-in `профиль <https://sonarcloud.io/organizations/lean-delivery/rules?activation=true&qprofile=AW0kegFj4oPgLAsgGJ2v>`_ языка Python
-(здесь и дальше для иллюстрации я буду давать ссылки на SonarCloud, но в SonarQube все выглядит точно так же). 
+Let's move on to setting up **Quality Profiles**.
+Every language plugin provides built-in quality profile – it's just a set of active and inactive rules, according to which your code is verified.
+Except the rules profile may contain templates and you can use them to create your own rules.
+Here is example – built-in `profile <https://sonarcloud.io/organizations/lean-delivery/rules?activation=true&qprofile=AW0kegFj4oPgLAsgGJ2v>`_ of python language
+(here and below to illustrate something I will give links to SonarCloud, but in SonarQube it looks absolutely the same). 
 
-Если у вас есть свои кастомные профили – вы можете их импортировать еще
-на этапе инсталляции с помощью роли и затем вручную назначить используемыми по умолчанию. Если кастомных профилей нет – отставьте
-все как есть, и по умолчанию будут использоваться Built-in профили. Скорее
-всего в дальнейшем вам все равно понадобится создать свои кастомные
-профили из Built-in профилей, когда вы захотите убрать/добавить правила
-или изменить их настройки.
+If you've got custom profiles – you may import them on installation step using our role and then manually set them as default.
+If no – just leave as is and built-in profiles will be used by default. Most likely later you will anyway have to create custom profiles from built-in profiles when there will be a need
+to activate/inactivate rules or change their settings.
 
-Отдельно нужно рассказать про Java профили. Дело в том, что для Java
-существует 4 актуальных плагина:
+Here I need to tell more about Java profiles, because there are 4 actual Java plugins:
 
--  коробочный sonar-java-plugin с профилем Sonar way, который
-   используется по умолчанию
--  сторонний sonar-findbugs-plugin с 4-мя профилями
--  сторонний sonar-checkstyle-plugin без профилей
--  сторонний sonar-pmd-plugin без профилей
+-  out of the box sonar-java-plugin with Sonar way profile, which is used by default
+-  third-party sonar-findbugs-plugin with 4 profiles
+-  third-party sonar-checkstyle-plugin without profiles
+-  third-party sonar-pmd-plugin without profiles
 
-Таким образом, если вы установите все 4 плагина и оставите настройки
-профилей без изменений – для проверки java кода будет
-использоваться только Sonar way профиль, т.е. будет работать только
-коробочный плагин, а 3 сторонних плагина будут бездействовать. Чтобы для проверки использовались все 4 плагина, я обычно создаю кастомный профиль,
-который включает в себя правила из всех этих плагинов. Есть планы по добавлению этого кастомного java профиля в роль.
+So if you install all 4 plugins and leave Quality Profiles settings as is, then Sonar way profile only will be used for java code verification, in other words you will use out of the box
+plugin only and 3 third-party plugins will stay unused. To use for verification all 4 plugins I usually create custom profile, which includes rules from all 4 plugins.
+We are planning to add this custom java profile to the role.
 
-Следующий шаг – настройка **Quality Gates**. Это набор метрик, в соответсвии с которыми
-проверка кода будет считаться успешной или не успешной. `Дефолтный набор <https://sonarcloud.io/organizations/lean-delivery/quality_gates/show/9>`_ проверяет процент покрытия кода,
-процент дублирования кода, а также рейтинги Maintanability, Reliability, Security. Я обычно использую более упрощенный `кастомный набор <https://sonarcloud.io/organizations/lean-delivery/quality_gates/show/7770>`_,
-во-первых потому что не всегда на проекте есть покрытие кода, во-вторых не всегда у команды есть ресурсы на исправление некритичных ошибок,
-а поэтому рейтинги не нужны, достаточно просто не пропускать блокеры, критикалы (иногда мажоры). Есть планы по добавлению в роль возможности импорта кастомных наборов метрик.
+Next step is **Quality Gates** setup. It's a metrics set, according to which code verification is treated as successful or failed.
+`Default quality gates <https://sonarcloud.io/organizations/lean-delivery/quality_gates/show/9>`_ code coverage percentage,
+duplication percentage, and alos Maintanability, Reliability, Security ratings. I usually use more simple `custom set <https://sonarcloud.io/organizations/lean-delivery/quality_gates/show/7770>`_,
+firstly because not all projects have the code coverage, not all teams have capacity to fix non-critical issues, that's why ratings are not required and it's enough not to pass blockers,
+criticals (and sometimes majors). We are planning to add custom quality gates import to the role.
 
-Далее нужно привязать SonarQube к вашей CI системе. В этой статье я буду говорить о Jenkins. Во-первых, в меню **Administration > Configuration > Webhooks** нужно добавить вебхук на Jenkins
-(или не нужно, если это уже было сделано ролью). Во-вторых, в самом Jenkins нужнo установить плагин SonarQube Scanner, затем в меню **Manage Jenkins > Configure System** добавить SonarQube Server и указать:
+Next you need to do is to bind SonarQube to your CI tool. In this article I'm going to use Jenkins. Firstly go to **Administration > Configuration > Webhooks** and add Jenkins webhook
+(it can be done by role). Secondly in Jenkins you need to install SonarQube Scanner plugin, then add SonarQube Server in **Manage Jenkins > Configure System** and set:
 
-- имя (любое, в дальнейшем будет использоваться в пайплайне)
-- ссылку по которой доступен SonarQube
-- токен, который вы добавляли admin пользователю
+- name (any, will be used later in pipeline)
+- SonarQube url
+- token you've added for admin user
 
-Важный момент про ссылку. Если используется https, то тут есть 2 варианта. Если у вас нормальный сертификат, его надо предварительно указать в SonarQube плейбуке
-(по умолчанию ставится самоподписанный). А если его нет и используется самоподписанный – вам придется импортировать его в Java, на которой работает Jenkins.
+An important note about the url. 2 variants are possible if you use https. If you've got a valid certificate you need to preliminarily set it in SonarQube playbook
+(self-signed is used by default). And if there is no valid certificate and you use self-signed – you need to import it to Java used by Jenkins.
 
-Кстати, для установки Jenkins я рекомендую использовать нашу роль `ansible-jenkins <https://github.com/lean-delivery/ansible-role-jenkins>`_, которая также может установить
-вышеупомянутый плагин и добавить SonarQube в настройках. В планах – опубликовать плейбуку, которая устанавливает связку Jenkins - SonarQube и учитывает этот нюанс с сертификатом.
+By the way, for Jenkins installation I would recommend our `ansible-jenkins <https://github.com/lean-delivery/ansible-role-jenkins>`_ role, which may also install mentioned plugin 
+and add SonarQube Server in the settings. In our further plans – to publish playbook which can install Jenkins + SonarQube bundle and set certificate correctly.
 
-Иногда вместо плагина используют отдельно установленный `sonar-scanner <https://docs.sonarqube.org/latest/analysis/scan/sonarscanner/>`_, а параметры запуска сканера указывают в файле sonar-project.properties.
-На мой взгляд удобнее пользоваться плагином, а параметры запуска передавать прямо в пайплайне.
+Sometimes instead of plugin they use separately installed `sonar-scanner <https://docs.sonarqube.org/latest/analysis/scan/sonarscanner/>`_ and set scan parameters in sonar-project.properties file.
+In my opinion it's more convenient to use plugin and set scan parameters directly in pipeline.
 
-**Пайплайн.**
+**Pipeline.**
 
-Итак рассмотрим ситуацию, когда у вас есть репозиторий с кодом, и вы используете простой git flow: есть главная ветка (develop/master), разработчики добавляют новый код в feature ветках и затем открывают пулл реквесты в главную ветку. Вы хотите использовать SonarQube для проверки как главной ветки, так и пулл реквестов.
-Тут надо сразу сказать, что в бесплатном comminuty SonarQube отсутствует одна важная особенность, которая есть в платных версиях и в SonarCloud – это анализ веток и пулл реквестов в одном проекте. Т.е. в платных версиях и в SonarCloud одному репозиторию будет соответсвовать один проект, в котором анализируются и ветки и пулл реквесты. Вот пример:
+Let's see the case when you've got a repo with a code and use simple git flow: there is main branch (develop/master), developers add new code in feature branches and open pull requests to main branch.
+You plan is to use SonarQube for verification of main branch and pull requests should be also verified.
+Here I need to say that free comminuty SonarQube lacks one important feature, that is available in paid versions and in SonarCloud – branches and pull requests analysis in the same project.
+In other words in paid versions and in SonarCloud one repo generates one project which is used for branches and pull requests analysis. Here is example:
 
 .. image:: {filename}/images/sonarqube_project.png
 
-А вот в бесплатной версии одному репозиторию будет соответсвовать много проектов, потому что придется создавать отдельный проект для главной ветки и для каждого пулл реквеста. И это достаточно неудобно, во-первых, потому что постоянно появляются новые пулл реквесты и вам рано или поздно придется задуматься о том, как автоматически удалять старые проекты. А во-вторых, если у вас несколько репозиториев, получится неразбериха из кучи проектов.
+In free version one repo generates a lot of projects, because you have to create separate project for main branch and for every pull request. И это достаточно неудобно, во-первых, потому что постоянно появляются новые пулл реквесты и вам рано или поздно придется задуматься о том, как автоматически удалять старые проекты. А во-вторых, если у вас несколько репозиториев, получится неразбериха из кучи проектов.
 К счастью пока что есть более удобный способ организовать проверку пулл реквестов с помощью специальных плагинов, но работает он только для версии SonarQube 7.6 и ниже и к тому же не для всех репозиториев:
 
 - для Github – не работает, `sonar-github-plugin <https://github.com/SonarSource/sonar-github>`_ перестал поддерживаться начиная с версии SonarQube 7.2. Теоретически должен работать с версией 7.1, но она уже достаточно устарела и вы не сможете использовать с ней свежие языковые плагины.
