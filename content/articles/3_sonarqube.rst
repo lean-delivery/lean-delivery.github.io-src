@@ -172,15 +172,16 @@ to block merge button in case of failed check.
 When blockers are covered you may run the same iteration for criticals, majors and so on. Then you may propose to dev team to keep code coverage level at a certain level, it could be done
 by adding appropriate condition to Quality Gates.
 
-If new active and inactive rules appear after plugins update don't forget to ask dev team for review.
+When new active and inactive rules appear after plugins update don't forget to ask dev team for review, maybe they will want to switch on/off some of the rules.
 
-В пайплайне вы могли заметить такой параметр как COMMENT_SEVERITY, который показывает для каких ошибок SonarQube будет добавлять подстрочный комментарий (например, для всех критикалов
-и старше, или для всех мажоров и старше). Если у вас в главной ветке много ошибок, я не рекомендую выставлять этот параметр в MINOR или INFO, иначе вы столкнетесь с ситуацией, когда
-в каждом пулл реквесте будет сотня комментариев о минорных ошибках. Если вы в текущей итерации занимаетесь блокерами, то выставляйте этот параметр например равным CRITICAL. Получится, что блокеры вы не пропускаете, а комментарии будут выводится и для блокеров, и для критикалов.
+In the pipeline you might notice a COMMENT_SEVERITY parameter, it sets minimal severity of issues to be supplied with inline comment (e.g. critical+ or major+). If you've got a lot
+of issues in main branch I would not recommend to set this parameter into MINOR or INFO, otherwise you will face the situation, when there are hundred of minor issues comments in every
+pull request. If you are on blockers iteration, set this parameter for example to CRITICAL. It means that blockers are commented and not allowed, while the criticals are still allowed but
+commented anyway. 
 
-Еще один совет – проверяйте с помощью SonarQube не только код разработчиков (бекенд и фронтенд), но и свой девопс код – плагины python, groovy, ansible, shellcheck вам в этом помогут.
+One more advice, check with SonarQube not only dev team code (backend and frontend), but devops code also - use python, groovy, ansible, shellcheck plugins for this purpose.
 
-**О чем не рассказано в этой статье.**
+**What is missed in the article**
 
-О добавлении code coverage статистики в SonarQube. Об OWASP плагине. О привязывании SonarQube к другим CI системам : Bamboo, Azure DevOps. О проверке maven, gradle и других проектов с помощью SonarQube. О радикальном исправлении ошибок по методу Сергея Подолицкого. 
-Обо всем этом читайте в следующей части, только на lean-delivery.com.
+How to add code coverage statistics to SonarQube. OWASP plugin. How to link SonarQube to other CI: Bamboo, Azure DevOps. How to verify maven, gradle and other projects with SonarQube. 
+How to quickly resolve SonarQube issues by Sergey Podolitsky approach. Read about all of this in the next part on lean-delivery.com only.
