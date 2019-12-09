@@ -132,8 +132,7 @@ pull requests are constantly coming and later or sooner you have to think about 
 I'm glad to tell you that there is more convenient way to organize pull requests verification with use of special plugins, but it works for SonarQube 7.6 and below and not for all
 repositories:
 
-- for Github – doesn't work, `sonar-github-plugin <https://github.com/SonarSource/sonar-github>`_ is no more supported started from SonarQube 7.2. Most likely it should work with 7.1, 
-but it's quite old now so you will not be able to install latest versions of language plugins.
+- for Github – doesn't work, `sonar-github-plugin <https://github.com/SonarSource/sonar-github>`_ is no more supported started from SonarQube 7.2. Most likely it should work with 7.1, but it's quite old now so you will not be able to install latest versions of language plugins.
 - for Bitbucket Server – works with use of `sonar-stash-plugin <https://github.com/AmadeusITGroup/sonar-stash/>`_
 - for Bitbucket Cloud – works with use of `sonar-bitbucket-plugin <https://github.com/mibexsoftware/sonar-bitbucket-plugin>`_
 - for Gitlab – works with use of `sonar-gitlab-plugin <https://github.com/mibexsoftware/sonar-bitbucket-plugin>`_
