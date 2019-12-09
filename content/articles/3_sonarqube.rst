@@ -91,6 +91,10 @@ So if you install all 4 plugins and leave Quality Profiles settings as is, then 
 plugin only and 3 third-party plugins will stay unused. To use for verification all 4 plugins I usually create custom profile, which includes rules from all 4 plugins.
 We are planning to add this custom java profile to the role.
 
+Еще один важный момент про кастомные профили. Если вы обновляете плагин и в этом обновлении добавляются новые активные правила, убедитесь в том, что новые правила активировались и в
+кастомном профиле, иначе от обновления не будет никакого эффекта. Сделать это можно так - сразу после обновления плагина в меню Rules выберите фильтр Available Since и укажите текущую дату.
+Затем в фильтре Quality Profile выберите по очереди built-in и кастомный профиль. Количество новых активных правил должно совпасть. Если в кастомном профиле их нет - активируйте вручную.
+
 Next step is **Quality Gates** setup. It's a metrics set, according to which code verification is treated as successful or failed.
 `Default quality gates <https://sonarcloud.io/organizations/lean-delivery/quality_gates/show/9>`_ code coverage percentage,
 duplication percentage, and alos Maintanability, Reliability, Security ratings. I usually use more simple `custom set <https://sonarcloud.io/organizations/lean-delivery/quality_gates/show/7770>`_,
