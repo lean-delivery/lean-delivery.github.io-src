@@ -139,20 +139,22 @@ but it's quite old now so you will not be able to install latest versions of lan
 - for Gitlab – works with use of `sonar-gitlab-plugin <https://github.com/mibexsoftware/sonar-bitbucket-plugin>`_
 - for Azure DevOps – doesn't work, there is no plugin
 
-The idea is to create projects for pull requests at all, but show info about all found issues directly into pull request. See how it looks like:
+The idea is to create projects for pull request at all, but show info about all found issues in the pull request directly. See how it looks like:
 
 .. image:: {filename}/images/sonarqube_pullrequest.png
 
-И это супер удобно, потому что под каждой проблемной строкой появляется комментарий с описанием ошибки и ссылкой на правило в SonarQube, в котором практически всегда указано, как ее исправить.
+This is super convenient, because you may see comment with error message under every bad line of code. Also there is link to SonarQube rule where you may find info about the fix.
 
-Сравните этот способ по удобству с первым способом, когда для пулл реквеста создается проект (пример `здесь <https://github.com/epam/aws-syndicate/pull/51>`_), а для того чтобы увидеть в чем суть ошибки разработчику сначала придется сделать несколько кликов, чтобы в этот проект попасть (в примере нажмите View Details > SonarCloud Code Analysis Details > 6 Code Smells, затем кликните на одну из ошибок, чтобы понять к какой строке кода она относится).
+Compare this approach by convenience with first one, where project is created for every pull request (like `here <https://github.com/epam/aws-syndicate/pull/51>`_), and to see
+the error details developer has to do some clicks to open the project in SonarQube (in example above click View Details > SonarCloud Code Analysis Details > 6 Code Smells, 
+then click on one of the issues to see what line of code it's related to).
 
-Допустим, вы решили использовать второй способ - в SonarQube будет один проект для проверки главной ветки, а пулл реквесты будут проверяться без проекта. Вот здесь можно взять
-`пайплайн <https://github.com/lean-delivery/ansible-role-sonarqube/blob/master/files/example_pipeline.groovy>`_ для запуска этих проверок.
+Let's say you've decided to use 2nd approach - there will be one project in SonarQube for main branch and pull requests will be checked without project creation. Here you may find
+`pipeline <https://github.com/lean-delivery/ansible-role-sonarqube/blob/master/files/example_pipeline.groovy>`_ to run these checks.
 
-**Как начать использовать на проекте.**
+**How to start using on your project.**
 
-Для начала добавьте шаг с SonarQube анализом в сборку основной ветки, но так чтобы он никогда падал – уберите все метрики из Quality Gates.
+At first add SonarQube analysis step to main branch build, but make it never failed by removing all metrics from Quality Gates.
 
 В SonarQube появится проект с результатом проверки основной ветки. Очень часто вы можете там увидеть, что найдены тысячи или десятки тысяч ошибок и разобрать такое количество разработчикам будет нереально. Особенно это характерно для огромных репозиториев монолитных приложений. В этом случае нужно отключить правила, которые генерируют ошибку чуть ли не на каждый файл репозитория, или изменить порог их срабатывания, если он есть. Чтобы посмотреть, какие правила генерируют больше всего ошибок, в проекте перейдите к списку найденных ошибок и разверните фильтр Rule.
 
