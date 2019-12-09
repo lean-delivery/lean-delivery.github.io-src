@@ -117,8 +117,8 @@ In my opinion it's more convenient to use plugin and set scan parameters directl
 
 Let's see the case when you've got a repo with a code and use simple git flow: there is main branch (develop/master), developers add new code in feature branches and open pull requests to main branch.
 You plan is to use SonarQube for verification of main branch and pull requests should be also verified.
-Here I need to say that free comminuty SonarQube lacks one important feature, that is available in paid versions and in SonarCloud – branches and pull requests analysis in the same project.
-In other words in paid versions and in SonarCloud one repo generates one project which is used for branches and pull requests analysis. Here is example:
+Here I need to say that free comminuty SonarQube lacks one important feature, that is available in paid versions and in SonarCloud – analysis of branches and pull requests in the same project.
+In other words in paid versions and in SonarCloud one repo generates one project which contains info about all verified branches and pull requests. Here is example:
 
 .. image:: {filename}/images/sonarqube_project.png
 
