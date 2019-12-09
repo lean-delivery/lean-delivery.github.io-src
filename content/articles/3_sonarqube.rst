@@ -174,7 +174,7 @@ by adding appropriate condition to Quality Gates.
 When new active and inactive rules appear after plugins update don't forget to ask dev team for review, maybe they will want to switch on/off some of the rules.
 
 In the pipeline you might notice a COMMENT_SEVERITY parameter, it sets minimal severity of issues to be supplied with inline comment (e.g. critical+ or major+). If you've got a lot
-of issues in main branch I would not recommend to set this parameter into MINOR or INFO, otherwise you will face the situation, when there are hundred of minor issues comments in every
+of issues in main branch I would not recommend to set this parameter into MINOR or INFO, otherwise you will face the hundreds of minor issue comments in every
 pull request. If you are on blockers iteration, set this parameter for example to CRITICAL. It means that blockers are commented and not allowed, while the criticals are still allowed but
 commented anyway. 
 
