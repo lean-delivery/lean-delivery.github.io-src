@@ -127,16 +127,19 @@ In other words in paid versions and in SonarCloud one repo generates one project
 
 .. image:: {filename}/images/sonarqube_project.png
 
-In free version one repo generates a lot of projects, because you have to create separate project for main branch and for every pull request. И это достаточно неудобно, во-первых, потому что постоянно появляются новые пулл реквесты и вам рано или поздно придется задуматься о том, как автоматически удалять старые проекты. А во-вторых, если у вас несколько репозиториев, получится неразбериха из кучи проектов.
-К счастью пока что есть более удобный способ организовать проверку пулл реквестов с помощью специальных плагинов, но работает он только для версии SonarQube 7.6 и ниже и к тому же не для всех репозиториев:
+In free version one repo generates a lot of projects, because you have to create separate project for main branch and for every pull request. It's not so convenient, firstly because new
+pull requests are constantly coming and later or sooner you have to think about auto deletion of old projects. Secondly if you've got not one repo there will be a mess.
+I'm glad to tell you that there is more convenient way to organize pull requests verification with use of special plugins, but it works for SonarQube 7.6 and below and not for all
+repositories:
 
-- для Github – не работает, `sonar-github-plugin <https://github.com/SonarSource/sonar-github>`_ перестал поддерживаться начиная с версии SonarQube 7.2. Теоретически должен работать с версией 7.1, но она уже достаточно устарела и вы не сможете использовать с ней свежие языковые плагины.
-- для Bitbucket Server – работает с помощью `sonar-stash-plugin <https://github.com/AmadeusITGroup/sonar-stash/>`_
-- для Bitbucket Cloud – работает с помощью `sonar-bitbucket-plugin <https://github.com/mibexsoftware/sonar-bitbucket-plugin>`_
-- для Gitlab – работает с помощью `sonar-gitlab-plugin <https://github.com/mibexsoftware/sonar-bitbucket-plugin>`_
-- для Azure DevOps – не работает, нет соответсвующего плагина
+- for Github – doesn't work, `sonar-github-plugin <https://github.com/SonarSource/sonar-github>`_ is no more supported started from SonarQube 7.2. Most likely it should work with 7.1, 
+but it's quite old now so you will not be able to install latest versions of language plugins.
+- for Bitbucket Server – works with use of `sonar-stash-plugin <https://github.com/AmadeusITGroup/sonar-stash/>`_
+- for Bitbucket Cloud – works with use of `sonar-bitbucket-plugin <https://github.com/mibexsoftware/sonar-bitbucket-plugin>`_
+- for Gitlab – works with use of `sonar-gitlab-plugin <https://github.com/mibexsoftware/sonar-bitbucket-plugin>`_
+- for Azure DevOps – doesn't work, there is no plugin
 
-Суть способа в том, чтобы вообще не создавать проекты для пулл реквестов, а выводить информацию о всех найденных ошибках прямо в пулл реквест. Это выглядит например вот так:
+The idea is to create projects for pull requests at all, but show info about all found issues directly into pull request. See how it looks like:
 
 .. image:: {filename}/images/sonarqube_pullrequest.png
 
