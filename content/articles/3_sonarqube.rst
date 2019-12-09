@@ -156,20 +156,23 @@ Let's say you've decided to use 2nd approach - there will be one project in Sona
 
 At first add SonarQube analysis step to main branch build, but make it never failed by removing all metrics from Quality Gates.
 
-Project with main branch analysis result should appear in SonarQube. Very ofter you may find here thousands or tens of thousands of issues and it's impossible for developers to review them.
-This is especially true for huge repositories of monolithic applications. В этом случае нужно отключить правила, которые генерируют ошибку чуть ли не на каждый файл репозитория, или изменить порог их срабатывания, если он есть. Чтобы посмотреть, какие правила генерируют больше всего ошибок, в проекте перейдите к списку найденных ошибок и разверните фильтр Rule.
+Project with main branch analysis result should appear in SonarQube. Very ofter you may find here thousands or tens of thousands of issues and it's impossible for developers to review all of them.
+This is especially true for huge repositories of monolithic applications. In that case try to switch off rules, that generate issues for almost every file in the repo, or try to change 
+their threshold if it's available. To see what rules generate the most issues go to issues list in the project and open Rule filter.
 
-Например, у вас в репозитории 1000 файлов и для каждого из них сгенерировалась ошибка line too long, more than 80 chars. Вряд ли кто-то когда либо будет это исправлять. Лучше отключить такое правило или изменить ему порог срабатывания. Суть в том, чтобы оставить только уникальные ошибки, которые встречаются в некоторых файлах репозитория, но не во всех сразу. При этом обязательно сообщите разработчикам, какие правила вы отключили и какие изменили, возможно они что-то захотят вернуть обратно.
+For example you've got 1000 source files in your repo and SonarQube shows "line too long, more than 80 chars" issue for every one of them. It's unlikely that anyone will ever fix this.
+It's better to disable this rule or change its threshold. The idea is to leave unique issues only, those that relate to some repository files, but not to all of them.
+Besides that be sure to inform dev team what rules were switched off or changed, perhaps they will want to revert some of them.
 
-Далее попросите разработчиков посмотреть найденные блокеры, отключить правила для тех из них, которые они не будут исправлять, затем исправить все оставшиеся. Попросите заодно просмотреть
-правила-блокеры, которые по умолчанию выключены, возможно разработчики захотят некоторые из них включить. Договоритесь о том, что
-блокеры в главную ветку вы больше не пропускаете. Для этого добавьте в Quality Gates метрику Blocker issues is greater than 0. Теперь если в главной ветке появится блокер – сборка билда
-упадет. Если блокер вносится пулл реквестом, проверка пулл реквеста тоже упадет. Если есть возможность - стоит заблокировать мерж пулл реквеста при наличии упавшей проверки.
+After that ask dev team to review found blockers and switch off rules for those of them which are not going to be fixed, then to fix all the rest. Also ask to review blocker rules switched off
+by default, perhaps developers will want to switch on some of them. Come to agreement that blockers are no more allowed in main branch. To do this add 'Blocker issues is greater than 0' condition
+to Quality Gates. Now if there is a blocker in main branch then build will be failed. If blocker is found in pull request its verification will be failed as well. If possible it makes sense
+to block merge button in case of failed check.
 
-После блокеров точно такую же итерацию можно провести для критикалов, потом мажоров и т.д. Затем можно предложить разработчикам поддерживать процент покрытия кода на определенном уровне путем
-добавления в Quality Gates соответсвующей метрики.
+When blockers are covered you may run the same iteration for criticals, majors and so on. Then you may propose to dev team to keep code coverage level at a certain level, it could be done
+by adding appropriate condition to Quality Gates.
 
-Если вы обновляете плагины и появляются новые активные и неактивные правила, не забывайте попросить разработчиков просмотреть их - возможно они захотят какие-то отключить, а какие-то включить.
+If new active and inactive rules appear after plugins update don't forget to ask dev team for review.
 
 В пайплайне вы могли заметить такой параметр как COMMENT_SEVERITY, который показывает для каких ошибок SonarQube будет добавлять подстрочный комментарий (например, для всех критикалов
 и старше, или для всех мажоров и старше). Если у вас в главной ветке много ошибок, я не рекомендую выставлять этот параметр в MINOR или INFO, иначе вы столкнетесь с ситуацией, когда
