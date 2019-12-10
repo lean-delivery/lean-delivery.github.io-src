@@ -145,7 +145,7 @@ The idea is to not create projects for pull requests at all, but to show info ab
 This is super convenient, because you may see comment with error message under every bad line of code. Also there is link to SonarQube rule where you may find info about the fix.
 
 Compare this approach by convenience with first one, where project is created for every pull request (like `here <https://github.com/epam/aws-syndicate/pull/51>`_), and to see
-the error details developer has to do some clicks to open the project in SonarQube and see the wrong line of code (in example above click View Details > SonarCloud Code Analysis Details > 6 Code Smells, 
+the wrong line of code and error details developer has to do some clicks before (in example above click View Details > SonarCloud Code Analysis Details > 6 Code Smells, 
 then click on one of the issues to see what line of code it's related to).
 
 Let's say you've decided to use 2nd approach - there will be one project in SonarQube for main branch while the pull requests will be checked without project creation. Here you may find
