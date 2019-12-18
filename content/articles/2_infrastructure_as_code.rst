@@ -9,25 +9,27 @@ Infrastructure as Code. Why you need it.
 Dawn of the Infrastructure as Code
 ----------------------------------
 
-At first, when the trees were taller and the grass was green, it was
-only bare-metal. Each server was a separate physical unit.
-Those were the times of simple solutions: you connect the server to the
-network and power source, login via telnet / ssh, install all the
-necessary software, set up cron-jobs for alerts and you're done!
+At first, when the trees were taller and the grass was green, it was only
+bare-metal. Each server was a separate physical unit. Those were the times
+of simple solutions: you connected the server to the network and power
+source, logged in via telnet / ssh, installed all the necessary software,
+set up cron-jobs for alerts and you were done!
 
 Then it came time for virtualization. From the early 2000s, the IT industry
-began to plunge into this amazing world, without even assuming how far this will go.
+began to plunge into this amazing world, without even assuming how far it
+would go.
 
-In the beginning, the same approach as when working with bare-metal
-was still good. Only instead of physical servers you had virtual ones.
-Over time, the number of servers has grown. Old methods began to take
-too much time. This situation stimulated the appearance of
-provisioners, which simplified and accelerated the process of setting
-up servers and installing software.
+In the beginning, the same approach used to work with with bare-metal was
+still good. The only difference was that you had virtual servers instead
+of physical ones . Gradually, the number of servers grew. Old methods began
+to take too much time. This situation stimulated the appearance of provisioners,
+which simplified and accelerated the process of setting up servers and 
+installing software.
 
-And now we live in the era of cloud computing. Today’s engineers 
-may need a dozen or a hundred servers to accomplish business goals.
-Need for new approach became critical.
+Now we live in the era of cloud computing. Today’s engineers may need dozens
+or hundreds of servers to accomplish business goals. Need for a new approach
+has become critical.
+
 
 
 Meet Infrastructure as Code
@@ -41,7 +43,7 @@ Definition:
 
     --Wikipedia
 
-Abbility to manage infrastructure as code provides a lot of important benefits!
+Ability to manage infrastructure as code provides a lot of important benefits!
 From this point we can:
 
 * infrastructure versioning
@@ -49,21 +51,21 @@ From this point we can:
 * scale number of environments with the speed of light
 
 
-All this features is available due to of IaC concept main targets:
+All these features are available thanks to IaC concept main targets, aimed to:
 
 - **reduce price**: now you utilize your computing resources with highest efficiency
-- **increase velocity**: engineers spending more time on the improvements and development
-  instead of the routine tasks
-- **decrease risks**: replacing manual operations with automation makes chance
-  of human error pretty low (if your automation covered by tests ¯\\_(ツ)_/¯ )
+- **increase velocity**: engineers can spend more time on improvements and development
+  instead of routine tasks
+- **decrease risks**: replacing manual operations with automation reduces a chance
+  of human error (if your automation is covered by tests ¯\\_(ツ)_/¯ )
 
 
 IaC tools
 ---------
 
-So, you descide to implement Infrastructure as Code.
+So, you decide to implement Infrastructure as Code.
 
-Now we should choose proper tool, that will match requirements of your project.
+Now we should choose a proper tool that will match the requirements of your project.
 
 Cloud vendor's tools short-list:
 
@@ -78,7 +80,7 @@ Cloud vendor's tools short-list:
 - Terraform
 
 
-Advantage of 3rd party tools is possibility to manage several clouds.
+The advantage of the 3rd party tools is a possibility to manage several clouds.
 
 
 Technical diferences of IaC tools
@@ -90,21 +92,21 @@ Technical diferences of IaC tools
 
    -- Yoda, Jedi Master
 
-From technical perspective, IaC tools realisations have several variations:
+From the technical perspective, IaC tools implementation has several variations:
 
 * Mutable Infrastructure vs Immutable Infrastructure
 * Procedural vs Declarative
 * Master vs Masterless
 * Agent vs Agentless
 
-Each of this options has strength and weakness. [#]_
+Each of these options has its strengths and weaknesses. [#]_
 
-Along with that, Terraform aims to be industry-wide acknowledged mainstream as of now (Dec 2019)
+Along with that, Terraform aims to be an industry-wide acknowledged mainstream as of today (Dec 2019).
+It’s important to mention the following: as soon as your IaC will describe more
+than several dozens of resources, migration to another tool becomes the pain
+somewhere a little lower than the back. And there is no automated tool to
+relieve this pain.
 
-Significant point should be mentioned: as soon as your IaC will
-describe more than several dozen of resources, migration on another
-tool become the pain somewhere little lower the back and there is no
-any automated tool to relieve this pain.
 
 Few words about Terraform
 -------------------------
@@ -123,7 +125,7 @@ also be called multiple times, either within the same configuration or
 in separate configurations, allowing resource configurations to be
 packaged and re-used.
 
-Here is code example that allows to create basic network infrastrustire
+Here is a code example that allows to create basic network infrastructure
 in AWS:
 ::
 
@@ -143,7 +145,7 @@ in AWS:
       enable_nat_gateway = true
     }
 
-More of useful Terraform modules could be finded at Lean Delivery project on GitHub:
+More useful Terraform modules can be found Lean Delivery project on GitHub:
 
 https://github.com/lean-delivery
 
@@ -151,17 +153,17 @@ https://github.com/lean-delivery
 Workspaces
 ==========
 
-Each Terraform configuration has an associated backend that defines how
+Each Terraform configuration has an associated back-end that defines how
 operations are executed and where persistent data such as the Terraform
-state are stored. The persistent data stored in the backend belongs to a
-workspace. Initially the backend has only one workspace, called
-"default", and thus there is only one Terraform state associated with
-that configuration.
+state is stored. The persistent data stored in the back-end belongs to a
+workspace. Initially, the back-end has only one workspace called
+"default", and thus, there is only one Terraform state associated with
+this configuration.
 
-Certain backends support multiple named workspaces, allowing multiple
+Certain back-ends support multiple named workspaces, allowing multiple
 states to be associated with a single configuration. The configuration
-still has only one backend, but multiple distinct instances of that
-configuration to be deployed without configuring a new backend or
+still has only one back-end, but multiple distinct instances of that
+configuration can be deployed without configuring a new back-end or
 changing authentication credentials.
 
 Multiple workspaces are currently supported by the following backends:
@@ -193,21 +195,21 @@ Terraservices concept was presented by Nicki Watt on `"Hashidays London
 "Terraform power, on!"
 ----------------------
 
-After almost two years of using Terraform we finally found our best practices.
-And now we will share it with you.
+After almost two years of using Terraform we have finally found our
+best practices. And now we will share themwith you.
 
 
 Assumption
-    Let's use in this example AWS as cloud provider
+    Let's use AWS as cloud provider in this example
 
 
 Classic case
 ============
 
-We should prepare infrastructure for new service. That includes:
+We should prepare infrastructure for a new service. That includes:
 
-- several EC2 instances for backend and frontend
-- some of this instances should be balanced with ALB
+- several EC2 instances for back-end and frontend
+- some of these instances should be balanced with ALB
 - RDS
 - VPC for all this stuff with subnets, routing tables, etc.
 
@@ -216,16 +218,17 @@ Solution
 ========
 
 Assumption
-    Let's use in this example AWS S3 as a storage for Terraform state files
+    In this example let's use AWS S3 as a storage for Terraform state files
 
 
-No one like meaningless duplication
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+No one likes meaningless duplication
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In our approach we use data inheritance from one terraservice to another.
 It is possible with Terraform data source ``terraform_remote_state``.
-Throu it we can recive any data, outputed in terraservices that already applied. As a result,
-in each new terraservice we should manually define only few variables, that are specific for it.
+Through it we can receive any data, outputted in terraservices that have
+already been applied. As a result, in every new terraservice we should
+manually define only a few variablesthat are specific for it.
 
 
 Divide and rule
@@ -242,7 +245,7 @@ into several groups: ::
         * network connectivity (if needed)
     3. infrastructure for our new service
 
-Last point could contain several separate Terraservices, depending 
+The last point could contain several separate Terraservices, depending
 on your target infrastructure: ::
 
     0. terraform state storage infrastructure (S3 and DynamoDB table)
@@ -258,39 +261,38 @@ on your target infrastructure: ::
 
 
 Notice
-    If you want to separate Production and non-Production environments 
-    by placing them in different accounts you should move Terraform
+    If you want to separate Production and non-Production environments
+    by placing them in different accounts, you should move Terraform
     backend configuration from ``*.tf`` files to the separate ``*.hcl`` files.
-    This allows you to choose required backend on ``terraform init`` step:
+    It allows you to choose required back-end on ``terraform init`` step:
 
     ``[user@host ~] $ terraform init -backend-config=/path/to/your/tf_backend_config.hcl``
 
-Catalog tree in your repository will looks like:
+The catalog tree in your repository will look this:
 
 .. image:: {filename}/images/infrastructure_as_code_file_tree.png
 
+Some readers may ask: "Why do you store tfstate files for ``0_terraform_infra`` in your git repository?"
+There is an answer: code in ``0_terraform_infra`` performs the creation of S3 for our Terraform backend,
+and until it doesn’t exist we have no other place to store tfstate files. These files don’t contain
+any sensitive data, so we don't break git best practices (I mean "never store any secrets in your repository").
 
-Attentive readers may ask: "Why you store tfstate files for 0_terraform_infra in your git repository?"
-There is an answer: code in 0_terraform_infra perform creation of S3 for our Terraform backend and 
-untill it not exist we have no any other place to store tfstate files. This files doesn't contain
-any sensetive data so we don't breaks git best practices (I mean "never store any secrets in your repository").
+Also ``0_terraform_infra`` creates a Terraform backend config file (``prod.hcl``, ``dev.hcl``), which will be used
+for all future terraservices. A name of the file will be generated based on the workspace name.
 
-Also ``0_terraform_infra`` creates Terraform backend config file (``prod.hcl``, ``dev.hcl``) which will be used
-for all futhure terraservices. Name of file will be generated based on workspace name.
+"By the power of Workspaces!"
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-
-"By the power of Worspaces!"
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Allright, we have Terraform code for our infrastructure. But it should manage several environments, prod and dev, at least.
-Terraform workspaces literally designed for this!
-But first of all let's agree about naming convention.
+Alright, we have a Terraform code for our infrastructure. But it should manage several environments, prod and dev, at least.
+Terraform workspaces are designed right for this!
+But first, let's agree on the naming convention.
 
 Assumption
-    Workspace name will contain environment name and AWS Region name, eg ``prod-eu-west-1`` and ``dev-us-east-1``.
+    Workspace name will contain the environment name and AWS Region name, eg ``prod-eu-west-1`` and ``dev-us-east-1``.
 
-For ``prod`` and ``dev`` environments we should use different input values, thats why each environment should have separate ``*.tfvars`` file.
-Let's name they as according worspace name to avoid confusion: ``prod-eu-west-1.tfvars`` and ``dev-us-east-1.tfvars``.
+For ``prod`` and ``dev`` environments we should use different input values, that’s why each environment should have a separate ``*.tfvars`` file. 
+Let's name them according to the workspace name to avoid confusion: ``prod-eu-west-1.tfvars`` and ``dev-us-east-1.tfvars``.
+
 
 Setup sequence example for ``1_core``: ::
 
@@ -306,11 +308,10 @@ Setup sequence example for ``1_core``: ::
 "Infrastructure, assemble!"
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Using all described hints gives you flexible control on each level of
+Using all the described hints, you’ll get flexible control on each level of 
 your environments. Competent separation of your infrastructure code
-will allow you update any part of infrastructure safely, with minimum
-risks and lowest affect on other parts of service.
-
+will allow you to update any part of the infrastructure safely, with minimum
+risks and lowest effect on other parts of the service.
 
 Sources
 -------
