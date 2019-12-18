@@ -19,9 +19,9 @@ Then it came time for virtualization. From the early 2000s, the IT industry
 began to plunge into this amazing world, without even assuming how far it
 would go.
 
-In the beginning, the same approach used to work with with bare-metal was
+In the beginning, the same approach used to work with bare-metal was
 still good. The only difference was that you had virtual servers instead
-of physical ones . Gradually, the number of servers grew. Old methods began
+of physical ones. Gradually, the number of servers grew. Old methods began
 to take too much time. This situation stimulated the appearance of provisioners,
 which simplified and accelerated the process of setting up servers and 
 installing software.
@@ -53,7 +53,7 @@ From this point we can:
 
 All these features are available thanks to IaC concept main targets, aimed to:
 
-- **reduce price**: now you utilize your computing resources with highest efficiency
+- **reduce price**: now you utilize your computing resources with the highest efficiency
 - **increase velocity**: engineers can spend more time on improvements and development
   instead of routine tasks
 - **decrease risks**: replacing manual operations with automation reduces a chance
@@ -83,8 +83,8 @@ Cloud vendor's tools short-list:
 The advantage of the 3rd party tools is a possibility to manage several clouds.
 
 
-Technical diferences of IaC tools
----------------------------------
+Technical differences of IaC tools
+----------------------------------
 
 .. epigraph::
 
@@ -196,7 +196,7 @@ Terraservices concept was presented by Nicki Watt on `"Hashidays London
 ----------------------
 
 After almost two years of using Terraform we have finally found our
-best practices. And now we will share themwith you.
+best practices. And now we will share them with you.
 
 
 Assumption
@@ -228,7 +228,7 @@ In our approach we use data inheritance from one terraservice to another.
 It is possible with Terraform data source ``terraform_remote_state``.
 Through it we can receive any data, outputted in terraservices that have
 already been applied. As a result, in every new terraservice we should
-manually define only a few variablesthat are specific for it.
+manually define only a few variables that are specific for it.
 
 
 Divide and rule
