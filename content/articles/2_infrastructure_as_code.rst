@@ -1,6 +1,6 @@
 Infrastructure as Code. Why you need it.
 ##############################################
-:date: 2019-12-03 19:00
+:date: 2019-12-20 13:00
 :author: Aliaksei Maiseyeu
 :tags: technical
 :slug: infrastructure_as_code
