@@ -102,7 +102,7 @@
                     <div class="epam-logo">
                         <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/Logo_Epam_Color.svg" alt="" />
                     </div>
-                    <p class="copyright">© 2018 EPAM Systems. All Rights Reserved.</p>
+                    <p class="copyright">© 2019 EPAM Systems. All Rights Reserved.</p>
                 </div>
             </div>
             <!--<div class="inner">-->
@@ -146,7 +146,7 @@
     <script type="text/javascript"  src="{{ js }}"></script>
     {% endfor %}
   {% endif %}
-  {% include 'partials/analytics.js' %}
-  {% include 'partials/disqus.js' %}
+  {% include 'partials/analytics.js.j2' %}
+  {% include 'partials/disqus.js.j2' %}
 </body>
 </html>
