@@ -1,6 +1,6 @@
 How to add SonarQube to CI process
 ##############################################
-:date: 2019-11-26 17:56
+:date: 2020-02-13 18:04
 :author: Dzmitry Rudnouski
 
 **SonarQube** is a tool for static code analysis. Check out this short `wiki article <https://en.wikipedia.org/wiki/SonarQube>`_ to get the general understanding of the tool.
