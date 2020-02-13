@@ -53,31 +53,28 @@ Note that besides the installation, the role can perform configuration actions:
 
 **Configuration**
 
-First thing you need to do – change default password for admin user in **Administration > Security > Users**. And here what happens when you forget it - `UK cell giant EE left a critical code system
-exposed with a default
-password. <https://www.zdnet.com/article/mobile-giant-left-code-system-online-default-password/>`_
-By the way we are going to add this configuration option to the role in the near future.
+First thing you need to do is to change default password for admin in **Administration > Security > Users**. Here what happens when you forget to do it - `UK cell giant EE left a critical code system
+exposed with a default password. <https://www.zdnet.com/article/mobile-giant-left-code-system-online-default-password/>`_
+By the way, we are going to add this configuration option to the role in the near future.
 
-In addition to password change add token for admin user, you will need it later.
+In addition to the password change, add a token for admin user, you will need it later.
 
-Now outsiders are not able to login with default admin/admin, but still able to view your code as a guest users.
-So next step is to close guest access in **Administration > Configuration > Security > Force user
-authentication.** This feature will be also added to role.
+Now unauthorized users are not able to login with default admin/admin, but they’re still able to view your code as guest users. So, the next step is to close guest access in
+**Administration > Configuration > Security > Force user authentication.** This feature will be also added to the role.
 
-If SonarQube access is required not only for you but for other team members also, it makes sense to configure LDAP authentication (this option exists in the role) or authentication
+If SonarQube access is required not only for you but for other team members as well, it makes sense to configure LDAP authentication (this option exists in the role) or authentication
 via GitHub, Bitbucket, Gitlab, etc.
 
 Let's move on to setting up **Quality Profiles**.
-Every language plugin provides built-in quality profile – it's just a set of active and inactive rules, according to which your code is verified.
-Except the rules profile may contain templates and you can use them to create your own rules.
-Here is example – built-in `profile <https://sonarcloud.io/organizations/lean-delivery/rules?activation=true&qprofile=AW0kegFj4oPgLAsgGJ2v>`_ of python language
-(here and below to illustrate something I will give links to SonarCloud, but in SonarQube it looks absolutely the same). 
+Every language plugin provides built-in quality profile – it's just a set of active and inactive rules, according to which your code is verified. Besides the rules, the profile may
+contain templates which you can use to create your own rules. Here is an example – built-in `profile <https://sonarcloud.io/organizations/lean-delivery/rules?activation=true&qprofile=AW0kegFj4oPgLAsgGJ2v>`_
+of Python (here and elsewhere I’ll give links to SonarCloud to illustrate the point I talk about, but in SonarQube it looks absolutely the same). 
 
-If you've got custom profiles – you may import them on installation step using our role and then manually set them as default.
-If no – just leave as is and built-in profiles will be used by default. Most likely later you anyway will have to create custom profiles from built-in profiles when there will be a need
-to activate/inactivate rules or change their settings.
+If you have custom profiles, you may import them right during the installation stage using our role and then manually set them as default. If you don’t, just leave everything as
+is – built-in profiles will be used by default. Most likely, later you’ll have to create custom profiles from built-in profiles when there will be a need to activate/inactivate
+rules or change their settings.
 
-Here I need to tell more about Java profiles, because there are 4 actual Java plugins:
+Let’s talk more about Java profiles. There are 4 up-to-date Java plugins:
 
 -  out of the box **sonar-java-plugin** with Sonar way profile, which is used by default
 -  third-party **sonar-findbugs-plugin** with 4 profiles
