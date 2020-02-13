@@ -103,49 +103,50 @@ Then you need to bind SonarQube to your CI tool. In this article I'm going to us
 - SonarQube url
 - token you've added for admin user
 
-An important note about the url. 2 variants are possible if you use https. If you've got a valid certificate you need to preliminarily set it in SonarQube playbook
-(because self-signed is used by default). And if there is no valid certificate and you use self-signed – you need to import it to Java that Jenkins is running on.
+An important note about the url. If you use https, there are 2 possible options. If you have a valid certificate you need to preliminarily set it in SonarQube playbook (because the
+self-signed certificate is used by default). And if there is no valid certificate and you use a self-signed one – you need to import it to Java that Jenkins is running on.
 
-By the way for Jenkins installation I would recommend our `ansible-jenkins <https://github.com/lean-delivery/ansible-role-jenkins>`_ role, which may also install mentioned plugin 
-and add SonarQube Server in the settings. In our further plans – to publish playbook which can install Jenkins + SonarQube bundle and set certificate correctly.
+By the way, for Jenkins installation I would recommend our `ansible-jenkins <https://github.com/lean-delivery/ansible-role-jenkins>`_ role, which may also install the already mentioned
+plugin and add SonarQube Server in the settings. In the future we’ll publish a playbook which can install Jenkins + SonarQube pack and set the certificate correctly.
 
-Sometimes instead of plugin they use separately installed `sonar-scanner <https://docs.sonarqube.org/latest/analysis/scan/sonarscanner/>`_ and pass scan parameters in sonar-project.properties file.
-In my opinion it's more convenient to use plugin and set scan parameters directly in pipeline.
+Sometimes instead of plugin they use a separately installed `sonar-scanner <https://docs.sonarqube.org/latest/analysis/scan/sonarscanner/>`_ and pass scan parameters in the
+sonar-project.properties file. In my opinion, it's more convenient to use the plugin and set scan parameters directly in the pipeline.
 
-**Pipeline.**
+**Pipeline**
 
-Let's see the case when you've got a repo with a code and use simple git flow: there is main branch (develop/master), developers add new code in feature branches and open pull requests to main branch.
-You plan is to use SonarQube for verification of main branch and pull requests should be also verified.
-Here I need to say that free comminuty SonarQube lacks one important feature that is available in paid versions and in SonarCloud – analysis of branches and pull requests in the same project.
-In other words in paid versions and in SonarCloud one repo generates one project which contains info about all verified branches and pull requests. Here is example:
+Let's explore the case when you've got a repo with a code and use simple git flow: there is the main branch (develop/master), developers add a new code to the feature branches and open
+pull requests to the main branch. You would like to use SonarQube for verification of both the main branch and pull requests (and maybe some other important branches). Mind that the
+free community SonarQube version lacks one important feature that is available in paid versions and in SonarCloud – analysis of branches and pull requests in the same project. In other
+words, in paid versions and in SonarCloud one repo goes with a single project which contains info about all verified branches and pull requests. Here is an example:
 
 .. image:: {filename}/images/sonarqube_project.png
 
-In free version one repo generates a lot of projects because you have to create separate projects for main branch and for every pull request. It's not so convenient, firstly because new
-pull requests are constantly coming and later or sooner you have to think about auto deletion of old projects. Secondly if you've got more than one repo to verify there will be a mess.
-I'm glad to tell you that there is more convenient way to organize pull requests verification with use of special plugins, but it works for SonarQube 7.6 and below and not for all
-repositories:
+In the free version one repo goes with multiple projects because you have to create separate projects for the main branch and for every pull request. It's fairly inconvenient, firstly
+because new pull requests are constantly coming up - at some point you’ll have to think about auto deletion of old projects. Secondly, if you have more than one repo to verify, there will
+be a mess. Fortunately, there are two more convenient ways to organize pull requests verification using special plugins. First (old one) works for SonarQube 7.6 and lower and not for all repositories:
 
-- for Github – doesn't work, `sonar-github-plugin <https://github.com/SonarSource/sonar-github>`_ is no more supported started from SonarQube 7.2. Most likely it should work with 7.1, but it's quite old now so you will not be able to install latest versions of language plugins.
+- for Github – doesn't work, `sonar-github-plugin <https://github.com/SonarSource/sonar-github>`_ is no longer supported starting from SonarQube 7.2. Most likely it should work with 7.1, but it's quite outdated, so you will not be able to install the latest versions of language plugins.
 - for Bitbucket Server – works with use of `sonar-stash-plugin <https://github.com/AmadeusITGroup/sonar-stash/>`_
 - for Bitbucket Cloud – works with use of `sonar-bitbucket-plugin <https://github.com/mibexsoftware/sonar-bitbucket-plugin>`_
 - for Gitlab – works with use of `sonar-gitlab-plugin <https://github.com/mibexsoftware/sonar-bitbucket-plugin>`_
-- for Azure DevOps – doesn't work, there is no plugin
+- for Azure DevOps – doesn't work, there is no plugin for it
 
-The idea is to not create projects for pull requests at all, but to show info about all found issues in the pull request directly. See how it looks like:
+The idea of the first way is to go without creating projects for pull requests at all, but instead to show info about all the issues found directly in the pull request. The name of this
+feature is pull request decoration and that’s how it looks like:
 
 .. image:: {filename}/images/sonarqube_pullrequest.png
 
-This is super convenient, because you may see comment with error message under every bad line of code. Also there is link to SonarQube rule where you may find info about the fix.
+This is super convenient, because you see a comment with the error message under every bad line of the code. Also, there is link to SonarQube rule where you may find information on how
+to fix the error.
 
-Compare this approach by convenience with first one, where project is created for every pull request (like `here <https://github.com/epam/aws-syndicate/pull/51>`_), and to see
-the wrong line of code and error details developer has to do some clicks before (in example above click View Details > SonarCloud Code Analysis Details > 6 Code Smells, 
-then click on one of the issues to see what line of code it's related to).
+The second way is to use new `sonarqube-community-branch-plugin <https://github.com/mc1arke/sonarqube-community-branch-plugin>`_, which allows to analyse branches and pull requests in the
+same project like SonarCloud or paid SonarQube. There are two restrictions for the current version 1.2.0: last SonarQube version 8.1 is not yet supported, pull requests decoration is
+not yet available. It looks like both of them will be gone in the next release. But if you don’t want to wait and need pull request decoration right now you may build plugin yourself.
 
-Let's say you've decided to use 2nd approach - there will be one project in SonarQube for main branch while the pull requests will be checked without project creation. Here you may find
-`pipeline <https://github.com/lean-delivery/ansible-role-sonarqube/blob/master/files/example_pipeline.groovy>`_ to run these checks.
+Here you may find the `pipeline <https://github.com/lean-delivery/ansible-role-sonarqube/blob/master/files/example_pipeline.groovy>`_ to run these checks SonarQube analysis, it contains
+stages for both ways.
 
-**How to start using on your project.**
+**How to start using on your project**
 
 At first add SonarQube analysis step to main branch build, but make it never failed by removing all metrics from Quality Gates.
 
