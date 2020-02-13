@@ -12,15 +12,15 @@ So, if you own an open source project on GitHub, Bitbucket or Azure DevOps, I re
 By the way, here is a real example: code of the site you are reading now is analyzed in sonarcloud.io -
 `lean-delivery.github.io-src <https://sonarcloud.io/dashboard?id=lean-delivery_lean-delivery.github.io-src>`_.
 
-SonarQube provides near 20 plugins out of the box, almost all of them are language plugins, their count may vary among the versions. Also there are near 60 third-party plugins of different types:
+SonarQube provides about 20 out of the box plugins, mostly language ones. Their number may vary, depending on the version. Also, there are nearly 60 third-party plugins of different types:
 
 -  language - e.g. groovy, yaml
 -  external analyzers - e.g. checkstyle, findbugs, pmd, ansible lint
 -  integration - e.g. Gitlab and Bitbucket authentication
 -  code coverage
--  localization and other
+-  localization and others
 
-It worth saying that free community version differs by capabilities from free sonarcloud.io. Here is comparison:
+It’s important to mention that the free community version and free sonarcloud.io have different functionality. Here is their comparison:
 
 .. image:: {filename}/images/sonarqube_table1.png
 
