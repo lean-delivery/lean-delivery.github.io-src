@@ -3,14 +3,13 @@ How to add SonarQube to CI process
 :date: 2019-11-26 17:56
 :author: Dzmitry Rudnouski
 
-**SonarQube** - is a tool for static code analysis. General concept you may get from this short `wiki article <https://en.wikipedia.org/wiki/SonarQube>`_.
-In addition to it I'll tell a bit more about SonarQube versions and plugins.
+**SonarQube** is a tool for static code analysis. Check out this short `wiki article <https://en.wikipedia.org/wiki/SonarQube>`_to get the general understanding of the tool.
+In addition to Wiki, I'll tell a bit more about SonarQube versions and plugins.
 
-As a standalone app SonarQube is available as free community version and 3 paid
-`versions <https://www.sonarsource.com/plans-and-pricing/>`_ - developer,
-enterprise и data center. In addition there is a paid SaaS solution - `sonarcloud.io <https://sonarcloud.io/>`_, which is however free for public projects.
-So if you own open source project on GitHub, Bitbucket or Azure DevOps I would recommend you to try it (and I can publish setup instructions).
-By the way here is live example: code of the site you are reading now is analyzed in sonarcloud.io -
+As a standalone app, SonarQube is available as the free community version and as 3 paid `versions <https://www.sonarsource.com/plans-and-pricing/>`_ - developer,
+enterprise и data center. Besides, there is a paid SaaS solution - `sonarcloud.io <https://sonarcloud.io/>`_, which is free for public projects.
+So, if you own an open source project on GitHub, Bitbucket or Azure DevOps, I recommend you try it (I can publish setup instructions if you need them).
+By the way, here is a real example: code of the site you are reading now is analyzed in sonarcloud.io -
 `lean-delivery.github.io-src <https://sonarcloud.io/dashboard?id=lean-delivery_lean-delivery.github.io-src>`_.
 
 SonarQube provides near 20 plugins out of the box, almost all of them are language plugins, their count may vary among the versions. Also there are near 60 third-party plugins of different types:
