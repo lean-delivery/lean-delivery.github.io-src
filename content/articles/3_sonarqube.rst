@@ -143,39 +143,39 @@ The second way is to use new `sonarqube-community-branch-plugin <https://github.
 same project like SonarCloud or paid SonarQube. There are two restrictions for the current version 1.2.0: last SonarQube version 8.1 is not yet supported, pull requests decoration is
 not yet available. It looks like both of them will be gone in the next release. But if you don’t want to wait and need pull request decoration right now you may build plugin yourself.
 
-Here you may find the `pipeline <https://github.com/lean-delivery/ansible-role-sonarqube/blob/master/files/example_pipeline.groovy>`_ to run these checks SonarQube analysis, it contains
+Here you may find the `pipeline <https://github.com/lean-delivery/ansible-role-sonarqube/blob/master/files/example_pipeline.groovy>`_ to run SonarQube analysis, it contains
 stages for both ways.
 
-**How to start using on your project**
+**How to start using it on your project**
 
-At first add SonarQube analysis step to main branch build, but make it never failed by removing all metrics from Quality Gates.
+First, add SonarQube analysis step to the main branch build and make sure it won’t fail by removing all metrics from Quality Gates.
 
-Project with main branch analysis result should appear in SonarQube. Very ofter you may find here thousands or tens of thousands of issues and it's impossible for developers to review all of them.
-This is especially true for huge repositories of monolithic applications. In that case try to switch off rules, that generate issues for almost every file in the repo, or try to change 
-their threshold if it's available. To see what rules generate the most issues go to issues list in the project and open Rule filter.
+A project with the main branch analysis result will appear in SonarQube. Very often you may find tons of issues there - and it's impossible for developers to review all of them. This is
+especially true for huge repositories of monolithic applications. In such a case try to switch off the rules that generate issues for almost every file in the repo, or try to change their
+threshold if there is any. To see what rules generate the majority of issues, go to the issues list in the project and open Rule filter.
 
-For example you've got 1000 source files in your repo and SonarQube shows "line too long, more than 80 chars" issue for every one of them. It's unlikely that anyone will ever fix this.
-It's better to disable this rule or change its threshold. The idea is to leave unique issues only, those that relate to some repository files, but not to all of them.
-Besides that be sure to inform dev team what rules were switched off or changed, perhaps they will want to revert some of them.
+For example, you have 1000 source files in your repo and SonarQube shows "line too long, more than 80 chars" issue for each of them. It's unlikely that anyone will ever fix this. It's
+better to disable the rule or change its threshold. The idea is to leave unique issues only, those that relate to some repository files, but not to all of them. Make sure to inform the
+dev team what rules you’ve switched off or changed, perhaps they will want to get back some of them.
 
-After that ask dev team to review found blockers and switch off rules for those of them which are not going to be fixed, then ask to fix all the rest. Also ask to review blocker rules switched off
-by default, perhaps developers will want to switch some of them on. Come to agreement that blockers are no more allowed in main branch. To do this add 'Blocker issues is greater than 0' condition
-to Quality Gates. Now if blocker appears in main branch then build will be failed. If blocker is found in pull request, its verification will be failed as well. If possible it makes sense
-to block merge button in case of failed check.
+Ask the dev team to review found blockers and switch off the rules for those of them that aren’t going to be fixed, then ask to fix all the rest. On top of that, ask to review blocker
+rules switched off by default - perhaps developers will want to switch some of them on. Agree that blockers are no more allowed in the main branch. To do this add 'Blocker issues is
+greater than 0' condition to Quality Gates. Now if a blocker appears in the main branch, then build will be failed. If a blocker is found in the pull request, its verification will be
+failed as well. If possible, it’s better to block merge button in case of a failed check.
 
-When blockers are covered you may run the same iteration for criticals, majors and so on. Then you may also propose to dev team to keep code coverage at a certain level, it could be done
-by adding appropriate condition to Quality Gates.
+Once blockers are covered, you may run the same iteration for criticals, majors and so on. Then you may also propose to the dev team to keep code coverage at a certain level. It could be
+done by adding an respective condition to Quality Gates.
 
-When new active and inactive rules appear after plugins update don't forget to ask dev team for review, maybe they will want to switch on/off some of the them.
+If new active and inactive rules appear after plugins update, don't forget to ask the dev team to review them. Maybe they will want to switch on/off some of the rules.
 
-In the pipeline you might notice a COMMENT_SEVERITY parameter, it sets minimal severity of issues to be followed with inline comment (e.g. critical+ or major+). If you've got a lot
-of issues in main branch I would not recommend to set this parameter to MINOR or INFO, otherwise you will face the hundreds of minor issue comments in every
-pull request. If you are on blockers iteration, set this parameter for example to CRITICAL. It means that blockers are commented and not allowed, while the criticals are still allowed but
-commented anyway. 
+In the pipeline you might notice a COMMENT_SEVERITY parameter. It sets minimal severity of issues to be followed with inline comment (e.g. critical+ or major+). If you have a lot of
+issues in the main branch, I wouldn’t recommend setting this parameter to MINOR or INFO, otherwise you will face the hundreds of minor issue comments in every pull request. If you are
+on blockers iteration, set this parameter to CRITICAL, for example. It means that blockers are commented and not allowed, while the criticals are still allowed but commented anyway. 
 
-One more advice, check with SonarQube not only dev team code (backend and frontend), but devops code also - use python, groovy, ansible, shellcheck plugins for this purpose.
+One more piece of advice for you: check not only the dev team code (backend and frontend) with SonarQube, but DevOps code as well - use python, groovy, ansible, shellcheck plugins for
+this purpose.
 
 **What is missed in the article**
 
-How to add code coverage statistics to SonarQube. OWASP plugin. How to link SonarQube to other CI: Bamboo, Azure DevOps. How to verify maven, gradle and other projects with SonarQube. 
-How to quickly resolve SonarQube issues by Sergey Podolitsky approach. Read about all of this in the next part on lean-delivery.com only.
+How to add code coverage statistics to SonarQube. OWASP plugin. How to link SonarQube to other CI: Bamboo, Azure DevOps. How to verify maven, gradle and other projects with SonarQube.
+How to resolve SonarQube issues quickly using Sergey Podolitsky’s approach. Stay tuned and read about all these in the next chapter on lean-delivery.com only.
