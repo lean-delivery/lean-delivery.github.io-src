@@ -81,25 +81,25 @@ Let’s talk more about Java profiles. There are 4 up-to-date Java plugins:
 -  third-party **sonar-checkstyle-plugin** without profiles
 -  third-party **sonar-pmd-plugin** without profiles
 
-So if you install all 4 plugins and leave Quality Profiles settings as is then only Sonar way profile will be used for java code verification, in other words you will use out of the box
-plugin while 3 other stay unused. To use for verification all 4 plugins I usually create custom profile which includes rules from all 4 plugins.
+If you install all 4 plugins and leave Quality Profiles settings without changes, then only the Sonar way profile will be used for java code verification - in other words, you will use
+the out-of-the-box plugin only, while the other 3 will stay unused. To use all 4 plugins for verification I usually create a custom profile that includes the rules from all 4 plugins.
 We are planning to add this custom profile to the role.
 
-One more important note about custom profiles. When you update a plugin and there are new active rules included into update, make sure the new rules are activated in custom profile also, 
-otherwise there will be no effect from the update. You may do it this way - just after plugin update go to Rules, select Available Since filter and set current date.
-Then in Quality Profile filter select built-in and custom profiles one after another. Number of new active rules should be the same. It there are no new rules in custom profile -
-activate them manually.
+Let me point out another important thing about custom profiles. When you update a plugin and this update contains new active rules, make sure the rules are activated in custom profile
+as well, otherwise the update won’t make any difference. You may do it this way. After the plugin gets updated, go to 'Rules', select 'Available Since' filter and set the current date.
+Then in 'Quality Profile' filter select 'built-in' and 'custom profiles' one after another. The number of new active rules should be the same. It there are no new rules in the custom
+profile, activate them manually.
 
-Next step is **Quality Gates** setup. It's a metrics set, according to which code verification is treated as successful or failed.
-`Default quality gates <https://sonarcloud.io/organizations/lean-delivery/quality_gates/show/9>`_ contain code coverage percentage,
-duplication percentage, and also Maintanability, Reliability, Security ratings. I usually use more simple `custom set <https://sonarcloud.io/organizations/lean-delivery/quality_gates/show/7770>`_,
-because not all projects have the code coverage and not all teams have capacity to fix non-critical issues, that's why ratings are not required and it's enough not to pass blockers,
-criticals (and sometimes majors). We are planning to add custom quality gates import to the role.
+Next step is **Quality Gates** setup. . It's a set of metrics, according to which code verification is either successful or failed.
+`Default quality gates <https://sonarcloud.io/organizations/lean-delivery/quality_gates/show/9>`_ contain code coverage percentage, duplication percentage, and Maintanability, Reliability,
+Security ratings. I usually use a simpler `custom set <https://sonarcloud.io/organizations/lean-delivery/quality_gates/show/7770>`_,
+as not every project has the code coverage and not every team has the capacity to fix non-critical issues.In such cases ratings are not required and it's enough not to miss out blockers,
+criticals (or sometimes majors). We plan to add the possibility to import custom quality gates to the role.
 
-Next you need to do is to bind SonarQube to your CI tool. In this article I'm going to use Jenkins. Firstly go to **Administration > Configuration > Webhooks** and add Jenkins webhook
+Then you need to bind SonarQube to your CI tool. In this article I'm going to use Jenkins. Firstly go to  **Administration > Configuration > Webhooks** and add Jenkins webhook
 (this step can be done by the role). Secondly, in Jenkins you need to install SonarQube Scanner plugin, add SonarQube Server in **Manage Jenkins > Configure System** and set:
 
-- name (any, will be used later in pipeline)
+- name (any name, it will be used later in the pipeline)
 - SonarQube url
 - token you've added for admin user
 
