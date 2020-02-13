@@ -90,7 +90,7 @@ as well, otherwise the update won’t make any difference. You may do it this wa
 Then in 'Quality Profile' filter select 'built-in' and 'custom profiles' one after another. The number of new active rules should be the same. It there are no new rules in the custom
 profile, activate them manually.
 
-Next step is **Quality Gates** setup. . It's a set of metrics, according to which code verification is either successful or failed.
+Next step is **Quality Gates** setup. It's a set of metrics, according to which code verification is either successful or failed.
 `Default quality gates <https://sonarcloud.io/organizations/lean-delivery/quality_gates/show/9>`_ contain code coverage percentage, duplication percentage, and Maintanability, Reliability,
 Security ratings. I usually use a simpler `custom set <https://sonarcloud.io/organizations/lean-delivery/quality_gates/show/7770>`_,
 as not every project has the code coverage and not every team has the capacity to fix non-critical issues.In such cases ratings are not required and it's enough not to miss out blockers,
