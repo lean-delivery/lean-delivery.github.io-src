@@ -24,36 +24,34 @@ It’s important to mention that the free community version and free sonarcloud.
 
 .. image:: {filename}/images/sonarqube_table1.png
 
-Further in this article I'll tell about free community version.
-Current releases now are 7.9.1 LTS и 8.0.
+Further in the article we’ll take a closer look at the free community version. The latest versions - 7.9.2 LTS and 8.1.
 
-**Installation.**
+**Installation**
 
 There are several ways to install SonarQube.
 
-1. Manually. Just don't waste your time.
+1. Manually. My advice – just don't waste your time on it.
 
-2. Get official docker `image <https://hub.docker.com/_/sonarqube>`_ at
-   dockerhub. I don't use this way, but if you are interested I can compare it with the next one.
+2. Get an official docker  `image <https://hub.docker.com/_/sonarqube>`_ on dockerhub. I don't use this method, but if you are interested, I can compare it with the next one.
 
-3. Install with our `ansible-sonarqube <https://github.com/lean-delivery/ansible-role-sonarqube>`_ role.
+3. Install SonarQube with our `ansible-sonarqube <https://github.com/lean-delivery/ansible-role-sonarqube>`_ role.
 
-Let me tell more about last approach. Look through the readme, get playbook example and adjust it to your needs. Playbook installs SonarQube with the all requirements: java (using our
+Let’s explore the last approach. Look through the readme, get the playbook example and adjust it to your needs. The playbook will install SonarQube and everything required for its work: java (using our
 `ansible-java <https://github.com/lean-delivery/ansible-role-java>`_ role), postgresql database and nginx (for https).
 
-Speaking of the mentioned java role. You may use it not only for SonarQube installation, but in lot of other cases. It's the best role of lean-delivery project and the best java role on Ansible Galaxy.
-Pay your attention to amount of supported JDK/JRE types and amount of supported platforms.
+The mentioned above java role can be used not only for SonarQube installation, but in lot of other cases as well. It's the best role of a lean-delivery project and the best java role on
+Ansible Galaxy. Pay your attention to the number of supported JDK/JRE types and number of supported platforms.
 
-To install SonarQube you need instance with at least 4 Gb memory – e.g. t3a.medium in AWS.
+To install SonarQube you need an instance with at least 4 Gb memory – e.g. t3a.medium in AWS.
 
-Note that besides the installation, role is able to do some configuration:
+Note that besides the installation, the role can perform configuration actions:
 
--  database migration – required when you've got an installed SonarQube and is going to update it to new version
--  add Jenkins webhook (see below in the article)
--  import custom quality profiles (see below also)
+-  Migrate the database – it’s required when you already have SonarQube installed and are going to update it to a new version
+-  add Jenkins webhook (we’ll talk about it further)
+-  import custom quality profiles (also will be covered below)
 -  configure LDAP authentication
 
-**Configuration.**
+**Configuration**
 
 First thing you need to do – change default password for admin user in **Administration > Security > Users**. And here what happens when you forget it - `UK cell giant EE left a critical code system
 exposed with a default
