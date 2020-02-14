@@ -129,7 +129,7 @@ all repositories:
 - for Github – doesn't work, `sonar-github-plugin <https://github.com/SonarSource/sonar-github>`_ is no longer supported starting from SonarQube 7.2. Most likely it should work with 7.1, but it's quite outdated, so you will not be able to install the latest versions of language plugins.
 - for Bitbucket Server – works with use of `sonar-stash-plugin <https://github.com/AmadeusITGroup/sonar-stash/>`_
 - for Bitbucket Cloud – works with use of `sonar-bitbucket-plugin <https://github.com/mibexsoftware/sonar-bitbucket-plugin>`_
-- for Gitlab – works with use of `sonar-gitlab-plugin <https://github.com/mibexsoftware/sonar-bitbucket-plugin>`_
+- for Gitlab – works with use of `sonar-gitlab-plugin <https://github.com/gabrie-allaigre/sonar-gitlab-plugin>`_
 - for Azure DevOps – doesn't work, there is no plugin for it
 
 The idea of the first way is to go without creating projects for pull requests at all, but display info on all the found issues directly in the pull request. The name of this feature is
