@@ -171,7 +171,7 @@ If new active and inactive rules appear after plugins update, don't forget to as
 
 In the pipeline you might notice a COMMENT_SEVERITY parameter. It sets minimal severity of issues to be followed with inline comment (e.g. critical+ or major+). If you have a lot of
 issues in the main branch, I wouldn’t recommend setting this parameter to MINOR or INFO, otherwise you will face the hundreds of minor issue comments in every pull request. If you are
-on blockers iteration, set this parameter to CRITICAL, for example. It means that blockers are commented and not allowed, while the criticals are still allowed but commented anyway. 
+on blockers iteration, set this parameter to CRITICAL, for example. It means that blockers are commented and not allowed, while the criticals are still allowed but commented anyway.
 
 One more piece of advice for you: check not only the dev team code (backend and frontend) with SonarQube, but DevOps code as well - use python, groovy, ansible, shellcheck plugins for
 this purpose.
@@ -181,6 +181,5 @@ this purpose.
 How to add code coverage statistics to SonarQube. OWASP plugin. How to link SonarQube to other CI: Bamboo, Azure DevOps. How to verify maven, gradle and other projects with SonarQube.
 How to resolve SonarQube issues quickly using Sergey Podolitsky’s approach. Stay tuned and read about all these in the next chapter on lean-delivery.com only.
 
-----
 
 Special thanks to Alena Kalionava and Ivan Bogomazov.
