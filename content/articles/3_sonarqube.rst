@@ -180,3 +180,6 @@ this purpose.
 
 How to add code coverage statistics to SonarQube. OWASP plugin. How to link SonarQube to other CI: Bamboo, Azure DevOps. How to verify maven, gradle and other projects with SonarQube.
 How to resolve SonarQube issues quickly using Sergey Podolitsky’s approach. Stay tuned and read about all these in the next chapter on lean-delivery.com only.
+
+----
+Special thanks to Alena Kalionava and Ivan Bogomazov.
