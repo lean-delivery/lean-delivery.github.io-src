@@ -14,7 +14,10 @@ Infrastructure as Code. Why you need it.
 Наше решение, с инфраструктурной точки зрения, весьма обычно.
 EC2 сервера, разделенные на целевые группы для фронтэнда и бэкэнда, балансируются AWS ALB.
 Маршрутизация между целевыми группами организована через правила в AWS ALB.
+
 .. image:: {filename}/images/hybris-diagram.png
+    :align: center
+
 Рис. 1 basic infra diagram
 
 В качестве деплоймент стратегии был выбран Red/Black.
@@ -22,7 +25,10 @@ EC2 сервера, разделенные на целевые группы дл
 - Terraform создает новые EC2 сервера на основе нашего стандартного золотого AMI образа и добавляет их в соответствующие целевые группы
 - Ansible устанавливает необходимые пакеты и копирует файлы на новые сервера, запускает необходимые сервисы, обновляет базу данных
 - Старые сервера останавливаются и удаляются как только новые сервера признаны работающими корректно
+
 .. image:: {filename}/images/red_black.png
+	:align: center
+
 Рис. 2
 
 **3) approach limitation**
@@ -37,8 +43,11 @@ EC2 сервера, разделенные на целевые группы дл
 
 **4) пайплайн, фича энвы**
 
-Весь GitLab pipeline состоит из 2 частей CI/CD
+Весь GitLab pipeline состоит из 2 частей CI/CD.
+
 .. image:: {filename}/images/gitLab-pipeline.png
+    :align: center
+
 Рис. 3
 На каждый пушш в гит можно создать 1 фича енв в рамках одной ветки.(код приложения можно обновлять по каждому пушу в фича ветку)
 CI запускается после Git push.
@@ -58,7 +67,9 @@ CD часть (опционально вклюенеи авто деплоя)
 Jira ticket -> New git branch(BAW-1331) -> inprogress ticket -> push after deveopment -> CI -> CD -> smoke tests - > New Merge Request -> code rewieiu -> waiting test ->intesting(manul test on depends) -> stop feature env -> wait for accept -> merge MR(develop) -> close
 
 Branch stratage изображена на рисунке 1( рисунок branch stratage)
+
 .. image:: {filename}/images/git_strategy.png
+    :align: center
 
 **5) terraform + ansible для non-prod/prod инфры**
 
